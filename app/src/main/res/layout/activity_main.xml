@@ -1,18 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation = "vertical"
+    android:layout_marginTop="15dp"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/profile_setup_screen1_heading"
+        android:textSize = "25sp"
+        android:textStyle = "bold"
+        android:textColor = "@color/black"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id = "@+id/userNameField"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "10dp"
+        android:paddingTop = "11dp"
+        android:paddingBottom = "7dp"
+        android:paddingRight = "130dp"
+
+        android:hint = "@string/usernameHint"
+        android:importantForAutofill="yes"
+        android:textSize = "20sp"
+        />
+
+    <EditText
+        android:id = "@+id/userAge"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "10dp"
+        android:paddingTop = "11dp"
+        android:paddingBottom = "7dp"
+        android:paddingRight = "145dp"
+
+        android:hint = "@string/userAgeHint"
+        android:importantForAutofill="yes"
+        android:textSize = "20sp"
+        />
+
+    <EditText
+        android:id = "@+id/userWeight"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "10dp"
+        android:paddingTop = "11dp"
+        android:paddingBottom = "7dp"
+        android:paddingRight = "118dp"
+
+        android:hint = "@string/userWeightHint"
+        android:importantForAutofill="yes"
+        android:textSize = "20sp"
+        />
+
+    <EditText
+        android:id = "@+id/userHeight"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "10dp"
+        android:paddingTop = "11dp"
+        android:paddingBottom = "7dp"
+        android:paddingRight = "120dp"
+
+        android:hint = "@string/userHeightHint"
+        android:importantForAutofill="yes"
+        android:textSize = "20sp"
+        />
+
+    <EditText
+        android:id = "@+id/userKnownIllnesses"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "10dp"
+        android:paddingTop = "11dp"
+        android:paddingBottom = "7dp"
+        android:paddingRight = "35dp"
+
+        android:hint = "@string/userKnownIllnessesHint"
+        android:importantForAutofill="yes"
+        android:textSize = "20sp"
+        />
+
+</LinearLayout>

@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">RespalyzerProject</string>
+    <string name="app_name">Respalyzer</string>
+
+
+    <string name="profile_setup_screen1_heading">Profile Set-Up</string>
+    <string name="usernameHint">Type name...</string>
+    <string name="userAgeHint">Type age...</string>
+    <string name="userWeightHint">Type Weight...</string>
+    <string name="userHeightHint">Type Height...</string>
+    <string name="userKnownIllnessesHint">Type Known Illnesses...</string>
 </resources>
