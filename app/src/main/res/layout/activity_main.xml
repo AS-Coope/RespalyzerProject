@@ -56,7 +56,7 @@
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
-            android:paddingRight = "118dp"
+            android:paddingRight = "60dp"
 
             android:hint = "@string/userWeightHint"
             android:importantForAutofill="yes"
@@ -71,7 +71,7 @@
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
-            android:paddingRight = "120dp"
+            android:paddingRight = "58dp"
 
             android:hint = "@string/userHeightHint"
             android:importantForAutofill="yes"

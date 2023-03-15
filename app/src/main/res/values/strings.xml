@@ -5,8 +5,8 @@
     <string name="profile_setup_screen1_heading">Profile Set-Up</string>
     <string name="usernameHint">Type Name...</string>
     <string name="userAgeHint">Type Age...</string>
-    <string name="userWeightHint">Type Weight...</string>
-    <string name="userHeightHint">Type Height...</string>
+    <string name="userWeightHint">Type Weight...(in kg)</string>
+    <string name="userHeightHint">Type Height...(in cm)</string>
     <string name="userKnownIllnessesHint">Type Known Illnesses...</string>
     <string name="userEmergencyContactNameHint">Emergency Contact Name</string>
     <string name="userEmergencyContactNumberHint">Emergency Contact #</string>
