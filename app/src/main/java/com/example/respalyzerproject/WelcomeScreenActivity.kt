@@ -13,6 +13,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
 
         val pUserName = intent.getStringExtra("EXTRA_USERNAME")
         val pUserAge = intent.getIntExtra("EXTRA_USERAGE", 0)
+        val pUserGender = intent.getStringExtra("EXTRA_USERGENDER")
         val pUserWeight = intent.getFloatExtra("EXTRA_USERWEIGHT", 0.0f)
         val pUserHeight = intent.getFloatExtra("EXTRA_USERHEIGHT",  0.0f)
         val pUserKnownIllnesses = intent.getStringExtra("EXTRA_KNOWNILLNESSES")
@@ -20,7 +21,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
         val pUserEmerNumber = intent.getStringExtra("EXTRA_EMERGNUMBER")
 
         showUser.text = "Welcome, $pUserName.\nThe following data was registered about you: " +
-                        "Age: $pUserAge\nWeight: $pUserWeight\nHeight: $pUserHeight\nKnown Illnesses: $pUserKnownIllnesses\n" +
+                        "Age: $pUserAge\nGender: $pUserGender\nWeight: $pUserWeight\nHeight: $pUserHeight\nKnown Illnesses: $pUserKnownIllnesses\n" +
                         "Emergency Contact Name: $pUserEmerName\nEmergency Contact Number: $pUserEmerNumber"
     }
 }

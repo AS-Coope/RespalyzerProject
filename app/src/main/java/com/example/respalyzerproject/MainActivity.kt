@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         // references to the various widgets on (from the activity_main file)
         val userName = findViewById<EditText>(R.id.userNameField)
         val userAge = findViewById<EditText>(R.id.userAge)
+        val userGender = findViewById<EditText>(R.id.userGender)
         val userWeight = findViewById<EditText>(R.id.userWeight)
         val userHeight = findViewById<EditText>(R.id.userHeight)
         val knownIllnesses = findViewById<EditText>(R.id.userKnownIllnesses)
@@ -33,12 +34,15 @@ class MainActivity : AppCompatActivity() {
 
             // checking to ensure all the required fields are filled before submission
             displayUser.text = ""
-            if (userName.getText().toString() == "" || userAge.getText().toString() == "" || userWeight.getText().toString() == "" || userHeight.getText().toString() == ""){
+            if (userName.getText().toString() == "" || userAge.getText().toString() == "" || userGender.getText().toString() == "" || userWeight.getText().toString() == "" || userHeight.getText().toString() == ""){
                 if (userName.getText().toString() == ""){
                     displayUser.text = "Name is required to be filled out"
                 }
                 if (userAge.getText().toString() == "" ){
                     displayUser.text = "Age is required to be filled out"
+                }
+                if (userGender.getText().toString() == ""){
+                    displayUser.text = "Gender is required to be filled out"
                 }
                 if (userWeight.getText().toString() == "" ){
                     displayUser.text = "Weight is required to be filled out"
@@ -57,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                     // putExtra allows the passing of data from one activity to the next using an Intent
                     it.putExtra("EXTRA_USERNAME", userName.text.toString())
                     it.putExtra("EXTRA_USERAGE", userAge.text.toString().toInt())
+                    it.putExtra("EXTRA_USERGENDER", userGender.text.toString())
                     it.putExtra("EXTRA_USERWEIGHT", userWeight.text.toString().toFloat())
                     it.putExtra("EXTRA_USERHEIGHT", userHeight.text.toString().toFloat())
                     it.putExtra("EXTRA_KNOWNILLNESSES", knownIllnesses.text.toString())

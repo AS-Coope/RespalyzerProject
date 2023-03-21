@@ -49,6 +49,21 @@
             />
 
         <EditText
+            android:id = "@+id/userGender"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop = "10dp"
+            android:paddingTop = "11dp"
+            android:paddingBottom = "7dp"
+            android:paddingRight = "115dp"
+
+            android:hint = "@string/userGender"
+            android:importantForAutofill="yes"
+            android:textSize = "20sp"
+            />
+
+        <EditText
             android:id = "@+id/userWeight"
 
             android:layout_width="wrap_content"
