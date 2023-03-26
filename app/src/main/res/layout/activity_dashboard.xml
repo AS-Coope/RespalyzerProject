@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DashboardActivity">
+
+
+    <Button
+        android:id="@+id/dbScreenAnalyzeBtn"
+        android:layout_width="310dp"
+        android:layout_height="102dp"
+        android:width="250dp"
+
+        android:text="@string/AnalyzeBreathing"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="182dp"
+        android:textSize = "20sp"
+        />
+
+    <Button
+        android:id="@+id/dbScreenAudioBtn"
+        android:layout_width="310dp"
+        android:layout_height="102dp"
+        android:width="250dp"
+
+        android:text="@string/AudioHistory"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="300dp"
+        android:textSize = "20sp"
+        />
+
+    <Button
+        android:id="@+id/dbScreenEmergencyBtn"
+        android:layout_width="310dp"
+        android:layout_height="102dp"
+        android:width="250dp"
+
+        android:text="@string/EmergencyContacts"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="424dp"
+        android:textSize = "20sp"
+        />
+
+    <Button
+        android:id="@+id/dbScreenMedicalBtn"
+        android:layout_width="310dp"
+        android:layout_height="102dp"
+        android:width="250dp"
+
+        android:text="@string/MedicalCentres"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="549dp"
+        android:textSize = "20sp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
