@@ -11,4 +11,9 @@
     <string name="userKnownIllnessesHint">Type Known Illnesses...</string>
     <string name="userEmergencyContactNameHint">Emergency Contact Name</string>
     <string name="userEmergencyContactNumberHint">Emergency Contact #</string>
+
+    <string name="AnalyzeBreathing">Analyze Breathing</string>
+    <string name="AudioHistory">Audio History</string>
+    <string name="EmergencyContacts">Emergency Contacts</string>
+    <string name="MedicalCentres">Medical Centres</string>
 </resources>
