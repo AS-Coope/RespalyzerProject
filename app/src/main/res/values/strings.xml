@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Respalyzer</string>
 
-
+    <!-- Main Activity Screen -->
     <string name="profile_setup_screen1_heading">Profile Set-Up</string>
     <string name="usernameHint">Type Name...</string>
     <string name="userAgeHint">Type Age...</string>
@@ -12,6 +12,10 @@
     <string name="userEmergencyContactNameHint">Emergency Contact Name</string>
     <string name="userEmergencyContactNumberHint">Emergency Contact #</string>
 
+    <!-- Welcome Screen -->
+    <string name="wsNextBtn">Continue</string>
+
+    <!-- Dashboard Screen -->
     <string name="AnalyzeBreathing">Analyze Breathing</string>
     <string name="AudioHistory">Audio History</string>
     <string name="EmergencyContacts">Emergency Contacts</string>

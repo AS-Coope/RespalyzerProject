@@ -11,13 +11,16 @@
         android:id="@+id/dbScreenAnalyzeBtn"
         android:layout_width="310dp"
         android:layout_height="102dp"
-        android:width="250dp"
 
+        android:width="250dp"
         android:text="@string/AnalyzeBreathing"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="182dp"
-        android:textSize = "20sp"
-        />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.278" />
 
     <Button
         android:id="@+id/dbScreenAudioBtn"
@@ -26,10 +29,13 @@
         android:width="250dp"
 
         android:text="@string/AudioHistory"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="300dp"
-        android:textSize = "20sp"
-        />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.476" />
 
     <Button
         android:id="@+id/dbScreenEmergencyBtn"
@@ -38,29 +44,64 @@
         android:width="250dp"
 
         android:text="@string/EmergencyContacts"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="424dp"
-        android:textSize = "20sp"
-        />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
 
     <Button
         android:id="@+id/dbScreenMedicalBtn"
         android:layout_width="310dp"
         android:layout_height="102dp"
+
         android:width="250dp"
-
         android:text="@string/MedicalCentres"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="549dp"
-        android:textSize = "20sp"
-        />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.885" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+    <ImageButton
+        android:id="@+id/dsSideMenu"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037"
+        app:srcCompat="@drawable/ic_baseline_dehaze_24" />
+
+    <ImageButton
+        android:id="@+id/dsUserAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        app:srcCompat="@drawable/user_account" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@drawable/respalyzer_logo_official" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
