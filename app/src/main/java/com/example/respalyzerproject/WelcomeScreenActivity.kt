@@ -29,6 +29,10 @@ class WelcomeScreenActivity : AppCompatActivity() {
 
         wsContinueBtn.setOnClickListener {
             Intent(this, DashboardActivity::class.java).also{
+                // sending across the emergency contacts attributes the Welcome Screen to the Emergency Contacts Screen
+                // the better to way to do this should be creating a data class
+                it.putExtra("EXTRA_EMERUSERNAME", pUserEmerName.toString())
+                it.putExtra("EXTRA_EMERUSERNUMBER", pUserEmerNumber.toString())
                 startActivity(it)
             }
         }

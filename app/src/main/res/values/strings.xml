@@ -20,4 +20,9 @@
     <string name="AudioHistory">Audio History</string>
     <string name="EmergencyContacts">Emergency Contacts</string>
     <string name="MedicalCentres">Medical Centres</string>
+
+    <!--Emergency Contacts Screen-->
+    <string name="ecTitle">Emergency Contacts</string>
+    <string name="ViewMedCentres">View Nearest Medical Centres</string>
+    <string name="ToDashboard">Return to Dashboard</string>
 </resources>
