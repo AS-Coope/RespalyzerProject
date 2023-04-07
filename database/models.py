@@ -26,10 +26,15 @@ class Medical_Centre(db.Model):
     centre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(200))
     location = db.Column(db.String(200))
+    geotag = db.Column(db.String(200))
+    contact_number = db.Column(db.String())
+    contact_number2 = db.Column(db.String())
 
-    def __init__(self, name, location):
+    def __init__(self, name, location, geotag, contact_number):
         self.name = name
         self.location = location
+        self.geotag = geotag
+        self.contact_number = contact_number
 
     def __repr__(self):
         return '<Medical_Centre %r>' % (self.name)
@@ -72,13 +77,13 @@ class Emergency_Contact(db.Model):
     contact_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'))
     contact = db.Column(db.String(200))
-    contact_number = db.Column(db.String(10))
+    contact_number = db.Column(db.String())
     
     
 
-    def __init__(self, contact, contact_number, user_id):
+    def __init__(self, contact, contact_num, user_id):
         self.contact = contact
-        self.contact_number = contact_number
+        self.contact_num = contact_num
         self.user_id = user_id
 
     def __repr__(self):
