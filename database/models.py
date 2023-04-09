@@ -1,7 +1,7 @@
 from . import db
 
 class User(db.Model):
-    __tablename__ = 'User'
+    __tablename__ = 'user'
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(200))
@@ -21,7 +21,7 @@ class User(db.Model):
         return '<User %r>' % (self.name)
 
 class Medical_Centre(db.Model):
-    __tablename__ = 'Medical Centres'
+    __tablename__ = 'medical_centres'
 
     centre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(200))
@@ -37,13 +37,13 @@ class Medical_Centre(db.Model):
         self.contact_number = contact_number
 
     def __repr__(self):
-        return '<Medical_Centre %r>' % (self.name)
+        return '<Medical Centre %r>' % (self.name)
 
 class Recording(db.Model):
-    __tablename__ = 'Recordings'
+    __tablename__ = 'recordings'
 
     recording_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     recording = db.Column(db.String(200))
     reading = db.Column(db.String(200))
     date_recorded = db.Column(db.DateTime(0,))
@@ -58,10 +58,10 @@ class Recording(db.Model):
         return '<Recording %r>' % (self.recording)
 
 class Existing_Condition(db.Model):
-    __tablename__ = 'Existing Conditions'
+    __tablename__ = 'existing conditions'
 
     condition_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     condition = db.Column(db.String(200))
 
     def __init__(self, condition, user_id):
@@ -72,10 +72,10 @@ class Existing_Condition(db.Model):
         return '<Existing_Condition %r>' % (self.condition)
 
 class Emergency_Contact(db.Model):
-    __tablename__ = 'Emergency Contact'
+    __tablename__ = 'emergency contact'
 
     contact_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     contact = db.Column(db.String(200))
     contact_number = db.Column(db.String())
     
