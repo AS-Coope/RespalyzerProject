@@ -1,6 +1,7 @@
 package com.example.respalyzerproject
 
 import android.Manifest
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -35,6 +36,7 @@ class RecordAudioActivity : AppCompatActivity() {
         val raStopRecButton = findViewById<Button>(R.id.raStopRecAudiobtn)
         val raPlayButton = findViewById<Button>(R.id.raPlayAudiobtn)
         val raStopPlayButton = findViewById<Button>(R.id.raStopPlayAudiobtn)
+        val raDashboardScreenButton = findViewById<Button>(R.id.raScreenDashboardBtn)
 
         // Start Recording
         raRecButton.setOnClickListener{
@@ -61,6 +63,15 @@ class RecordAudioActivity : AppCompatActivity() {
         raStopPlayButton.setOnClickListener {
             player.stop()
             Toast.makeText(applicationContext, "Playing Has Stopped", Toast.LENGTH_SHORT).show()
+        }
+
+        // Stop Playing Audio
+        raDashboardScreenButton.setOnClickListener {
+            Intent(this, DashboardActivity::class.java).also{
+
+                // starts the new activity (next screen, in this case)
+                startActivity(it)
+            }
         }
     }
 }
