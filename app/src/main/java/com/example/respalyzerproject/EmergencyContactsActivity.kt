@@ -2,9 +2,11 @@ package com.example.respalyzerproject
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 
 class EmergencyContactsActivity : AppCompatActivity() {
@@ -24,9 +26,11 @@ class EmergencyContactsActivity : AppCompatActivity() {
         val ecEmerContactName = intent.getStringExtra("EXTRA_EMERUSERNAME")
         val ecEmerContactNumber = intent.getStringExtra("EXTRA_EMERUSERNUMBER")
 
+        // call button variable
+        val ecCallButtonib = findViewById<ImageButton>(R.id.ecCallButton)
+
         ecEmerContNametv.text = ecEmerContactName
         ecEmerContNumtv.text = ecEmerContactNumber
-
         ecDashboardScreen.setOnClickListener{
             Intent(this, DashboardActivity::class.java).also{
 
@@ -34,5 +38,24 @@ class EmergencyContactsActivity : AppCompatActivity() {
                 startActivity(it)
             }
         }
+        ecViewMedCentres.setOnClickListener{
+            Intent(this, DashboardActivity::class.java).also{
+
+                // starts the new activity (next screen, in this case)
+                startActivity(it)
+            }
+        }
+
+        // Calling the User
+        ecCallButtonib.setOnClickListener{
+            // allows the phone app to be called and the contact's number is dialed
+            // but not called
+            // -CALL permission had to be added to AndroidManifest.xml file-
+            val it = Intent(Intent.ACTION_DIAL)
+            it.data = Uri.parse("tel:${ecEmerContactNumber.toString()}")
+            startActivity(it)
+            // it works!!!!!!!!!!!!!!! finally!!!
+        }
+
     }
 }
