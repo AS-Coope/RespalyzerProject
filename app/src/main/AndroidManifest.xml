@@ -51,7 +51,7 @@
 
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="AIzaSyCkPOnjZi4e2VkI-AaCUgU1L9gf8jjqtfM" />
+                android:value="" />
         </activity>
     </application>
 
