@@ -7,7 +7,7 @@ This file contains the routes for your application.
 
 from database import app, db
 from flask import render_template, request, make_response, redirect, flash, redirect, send_from_directory, jsonify
-from .models import User, Medical_Centre, Recording, Existing_Condition, Emergency_Contact
+from .models import User, Medical_Centre, Recording, Existing_Condition, Emergency_Contact, Disease
 
 from werkzeug.utils import secure_filename
 import os
@@ -56,7 +56,7 @@ def record():
         recording = content['recording']
         reading = content['reading']
         #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}','NOW()', (SELECT MAX(user_id) FROM user))")
+        cursor.execute(f"INSERT INTO recordings (recording, reading, user_id) VALUES ('{recording}','{reading}', (SELECT MAX(user_id) FROM user))")
         #This is not finished
         cnx.commit()
         cursor.close()
@@ -126,6 +126,25 @@ def get_contacts(user_id):
             }
             contacts.append(record)
         return jsonify({'contact': contacts}), 200
+    except mysql.connector.Error as error:
+        return jsonify({'error': f"An error has occurred: {error}"}), 500
+
+@app.route('/diseases/<disease_id>', methods=['GET'])
+def get_disease(disease_id):
+    try:
+        cnx = mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer')
+        cursor = cnx.cursor()
+        query = "SELECT name, symptoms, treatment FROM `diseases` WHERE disease_id = %s"
+        cursor.execute(query, (disease_id,))
+        diseases = []
+        for name, symptoms, treatment in cursor:
+            disease = {
+                'name': name,
+                'symptoms': symptoms,
+                'treatment': treatment
+            }
+            diseases.append(disease)
+        return jsonify({'disease': diseases}), 200
     except mysql.connector.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
     

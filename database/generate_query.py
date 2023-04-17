@@ -10,7 +10,7 @@ with open('database/medical_centres.csv', 'r') as csvfile:
     print(reader.fieldnames)
 
     # Initialize the SQL query
-    sql_query = "INSERT INTO Medical Centres (name, location, geotag, contact_number, contact_number2) VALUES "
+    sql_query = "INSERT INTO Medical Centres (name, location, geotag, contact_number, contact_number2, latitude, longitude) VALUES "
 
     # Loop through each row in the CSV file and append values to the SQL query
     for row in reader:
@@ -20,9 +20,11 @@ with open('database/medical_centres.csv', 'r') as csvfile:
         geotag = row['geotag']
         contact_number = row["contact_number"]
         contact_number2 = row["contact_number2"]
+        latitude = row["latitude"]
+        longitude = row["longitude"]
 
         # Append the values to the SQL query
-        sql_query += f"('{name}', '{location}', '{geotag}', '{contact_number}', '{contact_number2}'), "
+        sql_query += f"('{name}', '{location}', '{geotag}', '{contact_number}', '{contact_number2}', '{latitude}', '{longitude}'), "
 
     # Remove the last comma and space from the SQL query
     sql_query = sql_query[:-2]

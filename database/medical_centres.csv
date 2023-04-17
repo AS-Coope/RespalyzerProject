@@ -1,24 +1,24 @@
-﻿name,location,geotag,contact_number,contact_number2
-Noel Holmes Hospital,"Fort Charlotte Drive, Lucea",https://goo.gl/maps/rUP9aML3Zcc6Fv1W9,8769562733,8769562731
-Savanna-La-Mar Hospital,"Barracks Road, Savanna-La-Mar, Westmoreland",https://goo.gl/maps/jt41UbmFWX8Zayzj7,8769552533,
-Cornwall Regional Hospital,"Mount Salem, Montego Bay, St. James",https://goo.gl/maps/4U34X3azbNtuoAQy7,87695251009,8769407253
-Black River Hospital,"45 High Street, Black River, St. Elizabeth",https://goo.gl/maps/75vEzQNcWrTa6FDPA,8769652212,8769652224
-Falmouth Hospital,"Rodney Street, Falmouth, Trelawny",https://goo.gl/maps/31iTmGeVU5bqYFwj7,8769543250,8769543255
-Mandeville Hospital,"32 Hargreaves Avenue, Mandeville, Manchester",https://goo.gl/maps/434GrFDAN4grcyd87,8769622067,8769624461
-St. Ann's Bay Hospital,"Seville Road, St. Ann's Bay, St. Ann",https://goo.gl/maps/DTB4wNaPEmbg8Dh57,87697222723,87679496379
-Port Maria Hospital,"Trinity, Port Maria, St. Mary",https://goo.gl/maps/4MDN2mnzut3wTXhU9,8769942228,8769942277
-Annotto Bay Hospital,"Annotto Bay, St. Mary",https://goo.gl/maps/mqqmTEQveCNxbKZ97,87699622223,
-Port Antonio Hospital,"Naylors Hill, Port Antonio, Portland",https://goo.gl/maps/3nyUHDpdNhrvm5V29,87699326468,8767155778
-Princess Margaret Hospital,"54 Lyssons Road, Morant Bay, St. Thomas",https://goo.gl/maps/d63FkpMZfcQDy77r6,8769822304,8769822306
-May Pen Hospital,"Manchester Avenue, May Pen, Clarendon",https://goo.gl/maps/qdESy57xqsbNtD6FA,8769866307,8769027048
-Percy Junior Community Hospital,"Spaldings District, Clarendon",https://goo.gl/maps/KCjNuwmYjYLuEncx7,8769642322,8769642222
-Lionel Town Community Hospital,"Bustamante Drive, Lionel Town",https://goo.gl/maps/PxmxwcCUUq172VB27,8769866307,8769027048
-Linstead Hospital,"Rodney Hall Road, Linstead, St. Catherine",https://goo.gl/maps/J3oMEqtTUQTUts1o6,8769852241,8769852359
-Spanish Town Hospital,"Burke Road, Spanish Town, St. Catherine",https://goo.gl/maps/mtGmUuX2qg5tC29P9,87698430315,8769844672
-Victoria Jubilee Maternity Hospital,"2 North Street, Kingston",https://goo.gl/maps/MZuskT5DHS3EqKnAA,87692217004,87692202109
-Kingston Public Hospital,"North Street, Kingston",https://goo.gl/maps/Mb1ArMYs9hD4LaPn8,87692202109,87692205301
-Bellevue Hospital,"16 1/2 Windward Road, Kingston",https://goo.gl/maps/uSSeVPPged6W5XGS6,87692813809,8767596531
-Bustamante Hospital for Children,"5 Arthur Wint Drive, Kingston 5",https://goo.gl/maps/jQ7zBKMH6oaey7v78,8769265721,87696803009
-National Chest Hospital,"36 1/2 Barbican Road, Kingston 6",https://goo.gl/maps/pgnaBsScLxu1Uu9f9,8769720000,8767023496
-University Hospital of the West Indies,"Mona, Kingston 7",https://goo.gl/maps/zrMjZVFd75dA3LAv5,8769274112,87692716219
-Andrews Memorial Seventh-Day Adventist Hospital,"27 Hope Road, Kingston",https://goo.gl/maps/KNwLQNnduUt3MLv86,8769267401,
+﻿name,location,geotag,contact_number,contact_number2,latitude,longitude
+Noel Holmes Hospital,"Fort Charlotte Drive, Lucea",https://goo.gl/maps/rUP9aML3Zcc6Fv1W9,8769562733,8769562731,18.4523,-78.1678
+Savanna-La-Mar Hospital,"Barracks Road, Savanna-La-Mar, Westmoreland",https://goo.gl/maps/jt41UbmFWX8Zayzj7,8769552533,,18.226,-78.129
+Cornwall Regional Hospital,"Mount Salem, Montego Bay, St. James",https://goo.gl/maps/4U34X3azbNtuoAQy7,87695251009,8769407253,18.4704,-77.91
+Black River Hospital,"45 High Street, Black River, St. Elizabeth",https://goo.gl/maps/75vEzQNcWrTa6FDPA,8769652212,8769652224,18.0266,-77.8591
+Falmouth Hospital,"Rodney Street, Falmouth, Trelawny",https://goo.gl/maps/31iTmGeVU5bqYFwj7,8769543250,8769543255,18.4956,-77.6609
+Mandeville Hospital,"32 Hargreaves Avenue, Mandeville, Manchester",https://goo.gl/maps/434GrFDAN4grcyd87,8769622067,8769624461,18.0426,-77.5092
+St. Ann's Bay Hospital,"Seville Road, St. Ann's Bay, St. Ann",https://goo.gl/maps/DTB4wNaPEmbg8Dh57,87697222723,87679496379,18.4364,-77.2107
+Port Maria Hospital,"Trinity, Port Maria, St. Mary",https://goo.gl/maps/4MDN2mnzut3wTXhU9,8769942228,8769942277,18.3583,-76.8952
+Annotto Bay Hospital,"Annotto Bay, St. Mary",https://goo.gl/maps/mqqmTEQveCNxbKZ97,87699622223,,18.2729,-76.762
+Port Antonio Hospital,"Naylors Hill, Port Antonio, Portland",https://goo.gl/maps/3nyUHDpdNhrvm5V29,87699326468,8767155778,18.1764,-76.4562
+Princess Margaret Hospital,"54 Lyssons Road, Morant Bay, St. Thomas",https://goo.gl/maps/d63FkpMZfcQDy77r6,8769822304,8769822306,17.8807,-76.3905
+May Pen Hospital,"Manchester Avenue, May Pen, Clarendon",https://goo.gl/maps/qdESy57xqsbNtD6FA,8769866307,8769027048,17.9738,-77.2607
+Percy Junior Community Hospital,"Spaldings District, Clarendon",https://goo.gl/maps/KCjNuwmYjYLuEncx7,8769642322,8769642222,18.1552,-77.4659
+Lionel Town Community Hospital,"Bustamante Drive, Lionel Town",https://goo.gl/maps/PxmxwcCUUq172VB27,8769866307,8769027048,17.8101,-77.2406
+Linstead Hospital,"Rodney Hall Road, Linstead, St. Catherine",https://goo.gl/maps/J3oMEqtTUQTUts1o6,8769852241,8769852359,18.1332,-77.0318
+Spanish Town Hospital,"Burke Road, Spanish Town, St. Catherine",https://goo.gl/maps/mtGmUuX2qg5tC29P9,87698430315,8769844672,17.9925,-76.9482
+Victoria Jubilee Maternity Hospital,"2 North Street, Kingston",https://goo.gl/maps/MZuskT5DHS3EqKnAA,87692217004,87692202109,17.9768,-76.7953
+Kingston Public Hospital,"North Street, Kingston",https://goo.gl/maps/Mb1ArMYs9hD4LaPn8,87692202109,87692205301,17.9771,-76.7949
+Bellevue Hospital,"16 1/2 Windward Road, Kingston",https://goo.gl/maps/uSSeVPPged6W5XGS6,87692813809,8767596531,17.9698,-76.7719
+Bustamante Hospital for Children,"5 Arthur Wint Drive, Kingston 5",https://goo.gl/maps/jQ7zBKMH6oaey7v78,8769265721,87696803009,17.9995,-76.7781
+National Chest Hospital,"36 1/2 Barbican Road, Kingston 6",https://goo.gl/maps/pgnaBsScLxu1Uu9f9,8769720000,8767023496,18.0226,-76.7629
+University Hospital of the West Indies,"Mona, Kingston 7",https://goo.gl/maps/zrMjZVFd75dA3LAv5,8769274112,87692716219,18.0056,-76.7388
+Andrews Memorial Seventh-Day Adventist Hospital,"27 Hope Road, Kingston",https://goo.gl/maps/KNwLQNnduUt3MLv86,8769267401,,18.0145,-76.7885

@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -29,12 +30,17 @@ class Medical_Centre(db.Model):
     geotag = db.Column(db.String(200))
     contact_number = db.Column(db.String())
     contact_number2 = db.Column(db.String())
+    latitude = db.Column(db.Double(10,4))
+    longitude = db.Column(db.Double(10,4))
 
-    def __init__(self, name, location, geotag, contact_number):
+    def __init__(self, name, location, geotag, contact_number, contact_number2, latitude, longitude):
         self.name = name
         self.location = location
         self.geotag = geotag
         self.contact_number = contact_number
+        self.contact_number2 = contact_number2
+        self.latitude = latitude
+        self.longitude = longitude
 
     def __repr__(self):
         return '<Medical Centre %r>' % (self.name)
@@ -46,13 +52,12 @@ class Recording(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     recording = db.Column(db.String(200))
     reading = db.Column(db.String(200))
-    date_recorded = db.Column(db.DateTime(0,))
+    date_recorded = db.Column(db.DateTime(), default=datetime.utcnow)
 
-    def __init__(self, recording, user_id, reading, date_recorded):
+    def __init__(self, recording, user_id, reading):
         self.recording = recording
         self.user_id = user_id
         self.reading = reading
-        self.date_recorded = date_recorded
 
     def __repr__(self):
         return '<Recording %r>' % (self.recording)
@@ -88,3 +93,20 @@ class Emergency_Contact(db.Model):
 
     def __repr__(self):
         return '<Emergency_Contact %r>' % (self.contact)
+
+class Disease(db.Model):
+    __tablename__ = 'diseases'
+
+    disease_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(200))
+    symptoms = db.Column(db.String(500))
+    treatment = db.Column(db.String(500))
+
+
+    def __init__(self, name, symptoms, treatment):
+        self.name = name
+        self.symptoms = symptoms
+        self.treatment = treatment
+
+    def __repr__(self):
+        return '<Disease %r>' % (self.name)
