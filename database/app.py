@@ -26,7 +26,7 @@ def server():
 @app.route('/register', methods=["POST"])
 def register():
     try:
-        cnx = mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer')
+        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
         cursor = cnx.cursor()
         content = request.json
         name = content['name']
@@ -50,7 +50,7 @@ def register():
 @app.route('/record', methods=["POST"])
 def record():
     try:
-        cnx = mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer')
+        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
         cursor = cnx.cursor()
         content = request.json
         recording = content['recording']
@@ -68,7 +68,7 @@ def record():
 @app.route('/profile/<user_id>', methods=['GET'])
 def get_profile(user_id):
     try:
-        with mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer') as cnx:
+        with mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer') as cnx:
             cursor = cnx.cursor()
             query = "SELECT name, age, gender, weight, height FROM user WHERE user_id = %s"
             cursor.execute(query, (user_id,))
@@ -93,7 +93,7 @@ def get_profile(user_id):
 @app.route('/recordings/<user_id>', methods=['GET'])
 def get_recordings(user_id):
     try:
-        with mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer') as cnx:
+        with mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer') as cnx:
             cursor = cnx.cursor()
             query = "SELECT recording, reading, date_recorded FROM recordings WHERE user_id = %s"
             cursor.execute(query, (user_id,))
@@ -114,7 +114,7 @@ def get_recordings(user_id):
 @app.route('/contacts/<user_id>', methods=['GET'])
 def get_contacts(user_id):
     try:
-        cnx = mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer')
+        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
         cursor = cnx.cursor()
         query = "SELECT contact, contact_number FROM `emergency contact` WHERE user_id = %s"
         cursor.execute(query, (user_id,))
@@ -132,14 +132,16 @@ def get_contacts(user_id):
 @app.route('/diseases/<disease_id>', methods=['GET'])
 def get_disease(disease_id):
     try:
-        cnx = mysql.connector.connect(user='root', password='', host='localhost', database='respalyzer')
+        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
         cursor = cnx.cursor()
-        query = "SELECT name, symptoms, treatment FROM `diseases` WHERE disease_id = %s"
+        query = "SELECT name, description, causes, symptoms, treatment FROM `diseases` WHERE disease_id = %s"
         cursor.execute(query, (disease_id,))
         diseases = []
-        for name, symptoms, treatment in cursor:
+        for name, description, causes, symptoms, treatment in cursor:
             disease = {
                 'name': name,
+                'description' : description,
+                'causes' : causes,
                 'symptoms': symptoms,
                 'treatment': treatment
             }

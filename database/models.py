@@ -10,6 +10,7 @@ class User(db.Model):
     gender = db.Column(db.String(6))
     weight = db.Column(db.Integer)
     height = db.Column(db.String(30))
+    
 
     def __init__(self, name, age, gender, weight, height):
         self.name = name
@@ -28,10 +29,10 @@ class Medical_Centre(db.Model):
     name = db.Column(db.String(200))
     location = db.Column(db.String(200))
     geotag = db.Column(db.String(200))
-    contact_number = db.Column(db.String())
-    contact_number2 = db.Column(db.String())
-    latitude = db.Column(db.Double(10,4))
-    longitude = db.Column(db.Double(10,4))
+    contact_number = db.Column(db.String(12))
+    contact_number2 = db.Column(db.String(12))
+    latitude = db.Column(db.Float(10,4))
+    longitude = db.Column(db.Float(10,4))
 
     def __init__(self, name, location, geotag, contact_number, contact_number2, latitude, longitude):
         self.name = name
@@ -49,7 +50,7 @@ class Recording(db.Model):
     __tablename__ = 'recordings'
 
     recording_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    user_id = db.Column(db.Integer)
     recording = db.Column(db.String(200))
     reading = db.Column(db.String(200))
     date_recorded = db.Column(db.DateTime(), default=datetime.utcnow)
@@ -58,6 +59,8 @@ class Recording(db.Model):
         self.recording = recording
         self.user_id = user_id
         self.reading = reading
+        self.date_recorded = datetime.utcnow()
+        
 
     def __repr__(self):
         return '<Recording %r>' % (self.recording)
@@ -66,7 +69,7 @@ class Existing_Condition(db.Model):
     __tablename__ = 'existing conditions'
 
     condition_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    user_id = db.Column(db.Integer)
     condition = db.Column(db.String(200))
 
     def __init__(self, condition, user_id):
@@ -80,9 +83,9 @@ class Emergency_Contact(db.Model):
     __tablename__ = 'emergency contact'
 
     contact_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    user_id = db.Column(db.Integer)
     contact = db.Column(db.String(200))
-    contact_number = db.Column(db.String())
+    contact_number = db.Column(db.String(11))
     
     
 
@@ -99,12 +102,16 @@ class Disease(db.Model):
 
     disease_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(200))
+    description = db.Column(db.String(3000))
+    causes = db.Column(db.String(200))
     symptoms = db.Column(db.String(500))
     treatment = db.Column(db.String(500))
 
 
-    def __init__(self, name, symptoms, treatment):
+    def __init__(self, name, description, causes, symptoms, treatment):
         self.name = name
+        self.description = description
+        self.causes = causes
         self.symptoms = symptoms
         self.treatment = treatment
 

@@ -1,4 +1,12 @@
-﻿name,symptoms,treatment
-Chronic Obstructive Pulmonary Disease,,
-Lower Respiratory Tract Infection,,
-Upper Respiratory Tract Infection,,
+﻿name,description,causes,symptoms,treatment
+Chronic Obstructive Pulmonary Disease,"Chronic obstructive pulmonary disease (COPD) is a chronic inflammatory lung disease that causes obstructed airflow from the lungs. Symptoms include breathing difficulty, cough, mucus (sputum) production and wheezing. It's typically caused by long-term exposure to irritating gases or particulate matter, most often from cigarette smoke. People with COPD are at increased risk of developing heart disease, lung cancer and a variety of other conditions.
+
+Emphysema and chronic bronchitis are the two most common conditions that contribute to COPD. These two conditions usually occur together and can vary in severity among individuals with COPD.
+
+Chronic bronchitis is inflammation of the lining of the bronchial tubes, which carry air to and from the air sacs (alveoli) of the lungs. It's characterized by daily cough and mucus (sputum) production.
+
+Emphysema is a condition in which the alveoli at the end of the smallest air passages (bronchioles) of the lungs are destroyed as a result of damaging exposure to cigarette smoke and other irritating gases and particulate matter.
+
+Although COPD is a progressive disease that gets worse over time, COPD is treatable. With proper management, most people with COPD can achieve good symptom control and quality of life, as well as reduced risk of other associated conditions.",Tobacco smoking,"Frequent coughing or wheezing, Excess phlegm or sputum, Shortness of breath, Trouble taking a deep breath","Medicine, Pulmonary rehabilitation, Prevention and treatment of lung infections, Supplemental oxygen"
+Lower Respiratory Tract Infection,"A lower respiratory tract infection (RTI) occurs when there is an infection of the lungs, specifically in the lower airways. This infection is usually caused by a virus, but it can also be caused by bacteria or other less common organisms. ",Viral or bacterial infection of the lungs,"Coughing, Fever, Tightness of chest or chest pain, Breathing quickly or in an irregular pattern, Difficulty catching your breath, Wheezing, Overall change in well-being (decreased energy, appetite and fluid intake)","Drink plenty of fluids, Get plenty of rest, Take medication to control the fever"
+Upper Respiratory Tract Infection,"An upper respiratory tract infection (RTI) occurs when there is an infection of the sinuses or throat. This infection is usually caused by a virus, but it can also be caused by bacteria or other less common organisms. ",Viral or bacterial infection,"Coughing, Fever, Hoarse voice, Fatigue and lack of energy, Red eyes, Runny nose, Sore throat, Swollen lymph nodes",
