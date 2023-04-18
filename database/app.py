@@ -56,7 +56,7 @@ def record():
         recording = content['recording']
         reading = content['reading']
         #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO recordings (recording, reading, user_id) VALUES ('{recording}','{reading}', (SELECT MAX(user_id) FROM user))")
+        cursor.execute(f"INSERT INTO recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM user))")
         #This is not finished
         cnx.commit()
         cursor.close()
