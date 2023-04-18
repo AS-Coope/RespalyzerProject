@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import com.google.gson.Gson
+import khttp.get
 
 class EmergencyContactsActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId") // for some reason the ids of ecEmerContact1Name and the one for number are not being found in the xml although
@@ -55,6 +57,18 @@ class EmergencyContactsActivity : AppCompatActivity() {
             it.data = Uri.parse("tel:${ecEmerContactNumber.toString()}")
             startActivity(it)
             // it works!!!!!!!!!!!!!!! finally!!!
+        }
+
+        // Make HTTP GET request to Flask API
+        val url = "http://192.168.100.73:8080>/contacts/${user_id}" // Replace with your actual Flask API URL
+        get(url).let { response ->
+            if (response.statusCode == 200) {
+                val json = response.jsonObject.toString()
+                val contacts = Gson().fromJson(json, Contacts::class.java)
+                // Use the 'contacts' object to populate your UI with the retrieved data
+            } else {
+                // Handle error response
+            }
         }
 
     }

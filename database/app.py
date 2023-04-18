@@ -9,10 +9,18 @@ from database import app, db
 from flask import render_template, request, make_response, redirect, flash, redirect, send_from_directory, jsonify
 from .models import User, Medical_Centre, Recording, Existing_Condition, Emergency_Contact, Disease
 
+import pickle
+import librosa
+import soundfile
+import tempfile
+import numpy as np
+from scipy import signal
+
 from werkzeug.utils import secure_filename
 import os
 import mysql.connector
 
+gSampleRate = 7000
 
 
 ###
@@ -57,13 +65,84 @@ def record():
         reading = content['reading']
         #date_recorded = content['date_recorded']
         cursor.execute(f"INSERT INTO recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM user))")
-        #This is not finished
+        
+        model = pickle.load(open('model.pkl','rb'))
+        
+        
+        resampled_audio = resample_audio(recording)
+
+        upperCutoffFreq = 3000
+        cutoffFrequencies = [80, upperCutoffFreq]
+        highPassCoeffs = signal.firwin(401, cutoffFrequencies, fs=gSampleRate, pass_zero="bandpass")
+
+        normalized_audio = normalizeVolume(applyHighpass(resampled_audio, highPassCoeffs))
+        cleaned_audio = applyLogCompressor(normalized_audio, 30)
+        with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp:
+            temp_filename = temp.name
+            soundfile.write(temp_filename, cleaned_audio, gSampleRate)
+
+            features = np.array(audio_features(temp_filename))
+            features_reshaped = np.reshape(features, (1, 193, 1))
+            predictions = model.predict(features_reshaped)
+            outcome, percentage = process_predictions(predictions)
+        os.remove(temp_filename)
+        
         cnx.commit()
         cursor.close()
         cnx.close()
         return make_response({"success" : "Recording added"}, 201)
     except Exception as e:
         return make_response({'error': str(e)}, 400)
+    
+def resample_audio(filename):
+    audioBuffer, nativeSampleRate = librosa.load(filename, dtype=np.float32, mono=True, sr=None)
+        
+    if nativeSampleRate == gSampleRate:
+        return audioBuffer
+    else:
+        duration = len(audioBuffer) / nativeSampleRate 
+        nTargetSamples = int(duration * gSampleRate)
+        timeXSource = np.linspace(0, duration, len(audioBuffer), dtype=np.float32)
+        timeX = np.linspace(0, duration, nTargetSamples, dtype=np.float32)
+        resampledBuffer = np.interp(timeX, timeXSource, audioBuffer)
+        return resampledBuffer
+
+def normalizeVolume(npArr):
+    minAmp, maxAmp = (np.amin(npArr), np.amax(npArr))
+    maxEnv = max(abs(minAmp), abs(maxAmp))
+    scale = 1.0 / maxEnv
+    npArr *= scale
+    return npArr
+
+def applyLogCompressor(signal, gamma):
+    sign = np.sign(signal)
+    absSignal = 1 + np.abs(signal) * gamma
+    logged = np.log(absSignal)
+    scaled = logged * (1 / np.log(1.0 + gamma))
+    return sign * scaled
+
+def applyHighpass(npArr, highPassCoeffs):
+    return signal.lfilter(highPassCoeffs, [1.0], npArr)
+
+def audio_features(filename):
+    sound, sample_rate = librosa.load(filename)
+    stft = np.abs(librosa.stft(sound))  
+
+    mfccs = np.mean(librosa.feature.mfcc(y=sound, sr=sample_rate, n_mfcc=40), axis=1)
+    chroma = np.mean(librosa.feature.chroma_stft(S=stft, sr=sample_rate), axis=1)
+    mel = np.mean(librosa.feature.melspectrogram(y=sound, sr=sample_rate), axis=1)
+    contrast = np.mean(librosa.feature.spectral_contrast(S=stft, sr=sample_rate), axis=1)
+    tonnetz = np.mean(librosa.feature.tonnetz(y=librosa.effects.harmonic(sound), sr=sample_rate), axis=1)
+
+    concat = np.concatenate((mfccs, chroma, mel, contrast, tonnetz))
+    return concat
+
+def process_predictions(predictions):
+    readings = ["COPD", "Healthy", "URTI", "Bronchiectasis", "Pneumonia", "Bronchiolitis"]
+    largest_index = np.argmax(predictions)
+    percentage = predictions[largest_index]
+    outcome = readings[largest_index]
+    return outcome, percentage
 
 @app.route('/profile/<user_id>', methods=['GET'])
 def get_profile(user_id):

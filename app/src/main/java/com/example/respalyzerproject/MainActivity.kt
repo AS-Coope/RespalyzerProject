@@ -9,6 +9,9 @@ import android.widget.TextView
 import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
+    val url="http://192.168.100.73:8080";
+    val POST = "POST";
+    val GET = "GET";
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
