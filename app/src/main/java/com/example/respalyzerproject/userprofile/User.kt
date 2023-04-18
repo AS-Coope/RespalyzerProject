@@ -1,4 +1,4 @@
-package com.example.respalyzerproject
+package com.example.respalyzerproject.userprofile
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
