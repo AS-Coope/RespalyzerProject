@@ -13,9 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-<<<<<<< HEAD
-.env
-=======
 .env
 .flaskenv
->>>>>>> 450900a5e56026e14b26fe3a6784bd81e612cec5
