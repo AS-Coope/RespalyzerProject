@@ -6,7 +6,7 @@ This file contains the routes for your application.
 """
 
 from database import app, db
-from flask import render_template, request, make_response, redirect, flash, redirect, send_from_directory, jsonify
+from flask import request, make_response, flash, jsonify
 from .models import User, Medical_Centre, Recording, Existing_Condition, Emergency_Contact, Disease
 
 import pickle
@@ -18,7 +18,6 @@ from scipy import signal
 
 from werkzeug.utils import secure_filename
 import os
-import mysql.connector
 import psycopg2
 
 gSampleRate = 7000
