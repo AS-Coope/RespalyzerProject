@@ -19,6 +19,7 @@ from scipy import signal
 from werkzeug.utils import secure_filename
 import os
 import mysql.connector
+import psycopg2
 
 gSampleRate = 7000
 
@@ -34,7 +35,7 @@ def server():
 @app.route('/register', methods=["POST"])
 def register():
     try:
-        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
+        cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
         cursor = cnx.cursor()
         content = request.json
         name = content['name']
@@ -45,9 +46,9 @@ def register():
         emergency_contact = content['contact']
         emergency_contact_number = content['contact_number']
         condition = content['condition']
-        cursor.execute(f"INSERT INTO user (name, age, gender, weight, height) VALUES ('{name}','{age}','{gender}','{weight}','{height}')")
-        cursor.execute(f"INSERT INTO `emergency contact` (contact, user_id, contact_number) VALUES ('{emergency_contact}', (SELECT MAX(user_id) FROM user), '{emergency_contact_number}')")
-        cursor.execute(f"INSERT INTO `existing conditions` (`condition`, user_id) VALUES ('{condition}', (SELECT MAX(user_id) FROM user))")
+        cursor.execute(f"INSERT INTO public.user (name, age, gender, weight, height) VALUES ('{name}',{age},'{gender}',{weight},{height})")
+        cursor.execute(f"INSERT INTO public.\"emergency contact\" (contact, user_id, contact_number) VALUES ('{emergency_contact}', (SELECT MAX(user_id) FROM \"user\"), '{emergency_contact_number}')")
+        cursor.execute(f"INSERT INTO public.\"existing conditions\" (condition, user_id) VALUES ('{condition}', (SELECT MAX(user_id) FROM \"user\"))")
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -58,15 +59,15 @@ def register():
 @app.route('/record', methods=["POST"])
 def record():
     try:
-        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
+        cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
         cursor = cnx.cursor()
         content = request.json
         recording = content['recording']
         reading = content['reading']
         #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM user))")
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
         
-        model = pickle.load(open('model.pkl','rb'))
+        model = pickle.load(open('../model.pkl','rb'))
         
         
         resampled_audio = resample_audio(recording)
@@ -147,9 +148,9 @@ def process_predictions(predictions):
 @app.route('/profile/<user_id>', methods=['GET'])
 def get_profile(user_id):
     try:
-        with mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer') as cnx:
+        with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
             cursor = cnx.cursor()
-            query = "SELECT name, age, gender, weight, height FROM user WHERE user_id = %s"
+            query = "SELECT name, age, gender, weight, height FROM public.user WHERE user_id = %s"
             cursor.execute(query, (user_id,))
             row = cursor.fetchone()
             profiles = []
@@ -166,15 +167,15 @@ def get_profile(user_id):
                 return jsonify({'profile': profiles}), 200
             else:
                 return jsonify({'error': 'No recordings found'}), 404
-    except mysql.connector.Error as error:
+    except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
     
 @app.route('/recordings/<user_id>', methods=['GET'])
 def get_recordings(user_id):
     try:
-        with mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer') as cnx:
+        with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
             cursor = cnx.cursor()
-            query = "SELECT recording, reading, date_recorded FROM recordings WHERE user_id = %s"
+            query = "SELECT recording, reading, date_recorded FROM public.recordings WHERE user_id = %s"
             cursor.execute(query, (user_id,))
             recordings = []
             for recording, reading, date_recorded in cursor:
@@ -187,15 +188,15 @@ def get_recordings(user_id):
             return jsonify({'recordings': recordings}), 200
             #else:
                 #return jsonify({'error': 'No recordings found'}), 404
-    except mysql.connector.Error as error:
+    except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
 
 @app.route('/contacts/<user_id>', methods=['GET'])
 def get_contacts(user_id):
     try:
-        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
+        cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
         cursor = cnx.cursor()
-        query = "SELECT contact, contact_number FROM `emergency contact` WHERE user_id = %s"
+        query = "SELECT contact, contact_number FROM public.\"emergency contact\" WHERE user_id = %s"
         cursor.execute(query, (user_id,))
         contacts = []
         for contact, contact_number in cursor:
@@ -205,15 +206,15 @@ def get_contacts(user_id):
             }
             contacts.append(record)
         return jsonify({'contact': contacts}), 200
-    except mysql.connector.Error as error:
+    except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
 
 @app.route('/diseases/<disease_id>', methods=['GET'])
 def get_disease(disease_id):
     try:
-        cnx = mysql.connector.connect(user='root', password='\KEs{azmr|6}<_}0', host='34.71.7.124', database='respalyzer')
+        cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
         cursor = cnx.cursor()
-        query = "SELECT name, description, causes, symptoms, treatment FROM `diseases` WHERE disease_id = %s"
+        query = "SELECT name, description, causes, symptoms, treatment FROM public.diseases WHERE disease_id = %s"
         cursor.execute(query, (disease_id,))
         diseases = []
         for name, description, causes, symptoms, treatment in cursor:
@@ -226,7 +227,7 @@ def get_disease(disease_id):
             }
             diseases.append(disease)
         return jsonify({'disease': diseases}), 200
-    except mysql.connector.Error as error:
+    except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
     
 ###
