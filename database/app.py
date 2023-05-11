@@ -19,6 +19,7 @@ from scipy import signal
 from werkzeug.utils import secure_filename
 import os
 import psycopg2
+import keras
 
 gSampleRate = 7000
 
@@ -98,6 +99,7 @@ def resample_audio(filename):
     audioBuffer, nativeSampleRate = librosa.load(filename, dtype=np.float32, mono=True, sr=None)
         
     if nativeSampleRate == gSampleRate:
+        print("Resample Ran")
         return audioBuffer
     else:
         duration = len(audioBuffer) / nativeSampleRate 
@@ -105,6 +107,7 @@ def resample_audio(filename):
         timeXSource = np.linspace(0, duration, len(audioBuffer), dtype=np.float32)
         timeX = np.linspace(0, duration, nTargetSamples, dtype=np.float32)
         resampledBuffer = np.interp(timeX, timeXSource, audioBuffer)
+        print("Resample Ran")
         return resampledBuffer
 
 def normalizeVolume(npArr):
@@ -112,6 +115,7 @@ def normalizeVolume(npArr):
     maxEnv = max(abs(minAmp), abs(maxAmp))
     scale = 1.0 / maxEnv
     npArr *= scale
+    print("Normalize Ran")
     return npArr
 
 def applyLogCompressor(signal, gamma):
@@ -119,9 +123,11 @@ def applyLogCompressor(signal, gamma):
     absSignal = 1 + np.abs(signal) * gamma
     logged = np.log(absSignal)
     scaled = logged * (1 / np.log(1.0 + gamma))
+    print("Log Compressor Ran")
     return sign * scaled
 
 def applyHighpass(npArr, highPassCoeffs):
+    print("1 Ran")
     return signal.lfilter(highPassCoeffs, [1.0], npArr)
 
 def audio_features(filename):
@@ -135,13 +141,19 @@ def audio_features(filename):
     tonnetz = np.mean(librosa.feature.tonnetz(y=librosa.effects.harmonic(sound), sr=sample_rate), axis=1)
 
     concat = np.concatenate((mfccs, chroma, mel, contrast, tonnetz))
+    print("2 ran")
     return concat
 
 def process_predictions(predictions):
     readings = ["COPD", "Healthy", "URTI", "Bronchiectasis", "Pneumonia", "Bronchiolitis"]
+    print(predictions)
     largest_index = np.argmax(predictions)
-    percentage = predictions[largest_index]
+    print(largest_index)
+    percentage = predictions[0][largest_index]
+    print(percentage)
     outcome = readings[largest_index]
+    print(outcome)
+    print("3 ran")
     return outcome, percentage
 
 @app.route('/profile/<user_id>', methods=['GET'])
