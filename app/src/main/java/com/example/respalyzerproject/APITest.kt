@@ -21,26 +21,28 @@ class APITest : AppCompatActivity() {
 
         fun run() {
             val request = Request.Builder()
-                .url("http://publicobject.com/helloworld.txt")
+                .url("https://publicobject.com/helloworld.txt")
                 .build()
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
+                    // Handle failure
                     e.printStackTrace()
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    response.use {
-                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                        dataDisplay.text = "Text Switch"
-                        for ((name, value) in response.headers) {
-                            println("$name: $value")
-                        }
+                    if (!response.isSuccessful) {
+                        throw IOException("Unexpected code $response")
+                    }
 
-                        println(response.body!!.string())
+                    val responseBody = response.body?.string() ?: ""
+                    runOnUiThread {
+                        dataDisplay.text = responseBody
                     }
                 }
             })
         }
+
+        run()
     }
 }
