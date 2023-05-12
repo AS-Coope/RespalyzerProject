@@ -21,7 +21,7 @@ class APITest : AppCompatActivity() {
 
         fun run() {
             val request = Request.Builder()
-                .url("https://publicobject.com/helloworld.txt")
+                .url("http://192.168.100.81:8080/")
                 .build()
 
             client.newCall(request).enqueue(object : Callback {
