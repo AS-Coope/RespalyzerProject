@@ -70,6 +70,7 @@ class EmergencyContactsActivity : AppCompatActivity() {
             // it works!!!!!!!!!!!!!!! finally!!!
         }
 
+        /*
         // Make HTTP GET request to Flask API
         val url = "http://192.168.100.73:8080>/contacts/${user_id}" // Replace with your actual Flask API URL
         get(url).let { response ->
@@ -81,6 +82,8 @@ class EmergencyContactsActivity : AppCompatActivity() {
                 // Handle error response
             }
         }
+
+         */
 
     }
 }
