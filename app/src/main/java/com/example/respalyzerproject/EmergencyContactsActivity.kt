@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import com.google.gson.Gson
-import khttp.get
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.respalyzerproject.userprofile.UserViewModel
 
 class EmergencyContactsActivity : AppCompatActivity() {
+    private lateinit var ecUserViewModel: UserViewModel
     @SuppressLint("MissingInflatedId") // for some reason the ids of ecEmerContact1Name and the one for number are not being found in the xml although
                                         // they are there
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +26,24 @@ class EmergencyContactsActivity : AppCompatActivity() {
         val ecViewMedCentres = findViewById<Button>(R.id.ecScreenMedicalBtn)
         val ecDashboardScreen = findViewById<Button>(R.id.ecScreenDashboardBtn)
 
+        ecUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
         // putExtra Variable Assignments
+        /*
         val ecEmerContactName = intent.getStringExtra("EXTRA_EMERUSERNAME")
         val ecEmerContactNumber = intent.getStringExtra("EXTRA_EMERUSERNUMBER")
+
+         */
 
         // call button variable
         val ecCallButtonib = findViewById<ImageButton>(R.id.ecCallButton)
 
-        ecEmerContNametv.text = ecEmerContactName
-        ecEmerContNumtv.text = ecEmerContactNumber
+        ecUserViewModel.readUserProfile()
+        ecUserViewModel.userProfile.observe(this){
+            ecEmerContNametv.text = it.emergContactName.toString()
+            ecEmerContNumtv.text = it.emergContactNum.toString()
+        }
+
         ecDashboardScreen.setOnClickListener{
             Intent(this, DashboardActivity::class.java).also{
 
@@ -54,7 +65,7 @@ class EmergencyContactsActivity : AppCompatActivity() {
             // but not called
             // -CALL permission had to be added to AndroidManifest.xml file-
             val it = Intent(Intent.ACTION_DIAL)
-            it.data = Uri.parse("tel:${ecEmerContactNumber.toString()}")
+            it.data = Uri.parse("tel:${ecEmerContNumtv.text}")
             startActivity(it)
             // it works!!!!!!!!!!!!!!! finally!!!
         }
