@@ -241,6 +241,53 @@ def get_disease(disease_id):
     except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
     
+@app.route('/medical_centres', methods=['GET'])
+def get_centres():
+    try:
+        with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
+            cursor = cnx.cursor()
+            query = "SELECT centre_id, name, location, contact_number, contact_number2, latitude, longitude FROM public.medical_centres"
+            cursor.execute(query)
+            centres = []
+            for centre_id, name, location, contact_number, contact_number2, latitude, longitude in cursor:
+                centre = {
+                    'centre_id': centre_id,
+                    'name': name,
+                    'location': location,
+                    'contact': contact_number,
+                    'contact2': contact_number2,
+                    'latitude': latitude,
+                    'longitude': longitude
+                }
+                centres.append(centre)
+            return jsonify({'Medical Centres': centres}), 200
+            #else:
+                #return jsonify({'error': 'No recordings found'}), 404
+    except psycopg2.Error as error:
+        return jsonify({'error': f"An error has occurred: {error}"}), 500
+    
+@app.route('/medical_centres/<centre_id>', methods=['GET'])
+def get_centre(centre_id):
+    try:
+        cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
+        cursor = cnx.cursor()
+        query = "SELECT centre_id, name, location, contact_number, contact_number2, latitude, longitude FROM public.medical_centres WHERE centre_id = %s"
+        cursor.execute(query, (centre_id,))
+        centres = []
+        for centre_id, name, location, contact_number, contact_number2, latitude, longitude in cursor:
+            centre = {
+                'centre_id': centre_id,
+                'name': name,
+                'location': location,
+                'contact': contact_number,
+                'contact2': contact_number2,
+                'latitude': latitude,
+                'longitude': longitude
+            }
+            centres.append(centre)
+        return jsonify({'Medical Centres': centres}), 200
+    except psycopg2.Error as error:
+        return jsonify({'error': f"An error has occurred: {error}"}), 500
 ###
 # The functions below should be applicable to all Flask apps.
 ###
