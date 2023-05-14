@@ -20,4 +20,9 @@ interface UserDao {
     @Query("SELECT * FROM user_profile LIMIT 1")
     fun readUser(): Flow<User?>
 
+    // counting to know when one user in database
+    @Query("SELECT COUNT(*) FROM user_profile")
+    fun getUserCount(): Int
+
+
 }
