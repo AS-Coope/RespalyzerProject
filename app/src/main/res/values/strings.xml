@@ -25,4 +25,10 @@
     <string name="ecTitle">Emergency Contacts</string>
     <string name="ViewMedCentres">View Nearest Medical Centres</string>
     <string name="ToDashboard">Return to Dashboard</string>
+
+    <!-- User Profile Screen -->
+    <string name="upName">Edit Name…</string>
+    <string name="upWeight">Edit Weight…</string>
+    <string name="upHeight">Edit Height…</string>
+    <string name="SaveChanges">Save Changes</string>
 </resources>

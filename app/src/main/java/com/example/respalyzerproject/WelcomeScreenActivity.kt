@@ -7,7 +7,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.respalyzerproject.userprofile.UserDatabase
+import com.example.respalyzerproject.userprofile.UserRepository
 import com.example.respalyzerproject.userprofile.UserViewModel
+import com.example.respalyzerproject.userprofile.UserViewModelFactory
 
 class WelcomeScreenActivity : AppCompatActivity() {
 
@@ -19,7 +22,10 @@ class WelcomeScreenActivity : AppCompatActivity() {
         val showUser = findViewById<TextView>(R.id.tvUserInfo)
         val wsContinueBtn = findViewById<Button>(R.id.wsNextBtn)
 
-        wUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        val userDao = UserDatabase.getDatabase(application).userDao()
+        val repository = UserRepository(userDao)
+
+        wUserViewModel = ViewModelProvider(this, UserViewModelFactory(repository)).get(UserViewModel::class.java)
         /*
         val pUserName = intent.getStringExtra("EXTRA_USERNAME")
         val pUserAge = intent.getIntExtra("EXTRA_USERAGE", 0)

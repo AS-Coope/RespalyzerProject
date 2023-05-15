@@ -69,26 +69,30 @@
 
     <ImageButton
         android:id="@+id/dsSideMenu"
-        android:layout_width="64dp"
-        android:layout_height="58dp"
+        android:layout_width="46dp"
+        android:layout_height="45dp"
+        android:background="null"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037"
+        app:layout_constraintVertical_bias="0.036"
         app:srcCompat="@drawable/ic_baseline_dehaze_24" />
 
     <ImageButton
         android:id="@+id/dsUserAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="45dp"
+        android:background="null"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
+        app:layout_constraintVertical_bias="0.036"
         app:srcCompat="@drawable/user_account" />
 
     <ImageView

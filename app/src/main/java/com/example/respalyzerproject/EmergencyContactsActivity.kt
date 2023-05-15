@@ -10,7 +10,10 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.respalyzerproject.userprofile.UserDatabase
+import com.example.respalyzerproject.userprofile.UserRepository
 import com.example.respalyzerproject.userprofile.UserViewModel
+import com.example.respalyzerproject.userprofile.UserViewModelFactory
 
 class EmergencyContactsActivity : AppCompatActivity() {
     private lateinit var ecUserViewModel: UserViewModel
@@ -26,7 +29,9 @@ class EmergencyContactsActivity : AppCompatActivity() {
         val ecViewMedCentres = findViewById<Button>(R.id.ecScreenMedicalBtn)
         val ecDashboardScreen = findViewById<Button>(R.id.ecScreenDashboardBtn)
 
-        ecUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        val userDao = UserDatabase.getDatabase(application).userDao()
+        val repository = UserRepository(userDao)
+        ecUserViewModel = ViewModelProvider(this, UserViewModelFactory(repository)).get(UserViewModel::class.java)
 
         // putExtra Variable Assignments
         /*
