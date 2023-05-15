@@ -7,7 +7,7 @@
     tools:context=".AudioDetailsActivity">
 
     <Button
-        android:id="@+id/upDashboardBtn2"
+        android:id="@+id/adDashboardBtn"
         android:layout_width="307dp"
         android:layout_height="71dp"
         android:text="@string/ToDashboard"

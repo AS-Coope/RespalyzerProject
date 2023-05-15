@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecordAudioActivity">
-
+    tools:context=".NoIllnessActivity">
     <ImageButton
         android:id="@+id/dsSideMenu3"
         android:layout_width="46dp"
@@ -46,53 +45,22 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/raRecAudiobtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Record Audio"
+        android:id="@+id/niMedicalCentreBtn"
+        android:layout_width="310dp"
+        android:layout_height="80dp"
+
+        android:width="250dp"
+        android:text="@string/arMedicalCentre"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.639" />
 
     <Button
-        android:id="@+id/raStopRecAudiobtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Recording"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431" />
-
-    <Button
-        android:id="@+id/raPlayAudiobtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play Audio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614" />
-
-    <Button
-        android:id="@+id/raStopPlayAudiobtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Playing Audio"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
-
-    <Button
-        android:id="@+id/raScreenDashboardBtn"
+        android:id="@+id/niScreenDashboardBtn"
         android:layout_width="310dp"
         android:layout_height="80dp"
 
@@ -101,8 +69,32 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.849" />
+        app:layout_constraintVertical_bias="0.806" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="239dp"
+        android:layout_height="82dp"
+        android:gravity="center"
+        android:text="@string/arNoIllnessAdvice"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="244dp"
+        android:layout_height="57dp"
+        android:gravity="center"
+        android:text="@string/arNoIllness"
+        android:textColor="@color/sharp_green"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="197dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
