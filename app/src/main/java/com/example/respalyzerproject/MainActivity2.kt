@@ -17,7 +17,7 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var mUserViewModel: UserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_map_location)
 
         // references to the various widgets on (from the activity_main file)
         val userName = findViewById<EditText>(R.id.userNameField)

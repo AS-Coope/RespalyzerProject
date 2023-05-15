@@ -22,7 +22,7 @@
             android:id = "@+id/userNameField"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -37,7 +37,7 @@
             android:id = "@+id/userAge"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -52,7 +52,7 @@
             android:id = "@+id/userGender"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -67,7 +67,7 @@
             android:id = "@+id/userWeight"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -82,7 +82,7 @@
             android:id = "@+id/userHeight"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -97,7 +97,7 @@
             android:id = "@+id/userKnownIllnesses"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -112,7 +112,7 @@
             android:id = "@+id/userEmergencyContactName"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -127,7 +127,7 @@
             android:id = "@+id/userEmergencyContactNumber"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -139,15 +139,14 @@
             />
 
         <Button
-            android:id = "@+id/profileScreen1NextBtn"
+            android:id="@+id/profileScreen1NextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop = "30dp"
-            android:layout_marginLeft = "0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="30dp"
             android:width="250dp"
 
-            android:text = "Next"
-            />
+            android:text="Next" />
 
         <TextView
             android:id = "@+id/displayUser"

@@ -8,32 +8,31 @@
 
     <ImageButton
         android:id="@+id/ecSideMenu"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:background="#00FFFFFF"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037"
+        app:layout_constraintVertical_bias="0.036"
         app:srcCompat="@drawable/ic_baseline_dehaze_24"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/ecUserAccount"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
-
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036"
-        app:srcCompat="@drawable/user_account"
+        app:srcCompat="@drawable/account_circle_fill0_wght400_grad0_opsz48"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
@@ -125,9 +124,9 @@
 
     <ImageButton
         android:id="@+id/ecCallButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="null"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"

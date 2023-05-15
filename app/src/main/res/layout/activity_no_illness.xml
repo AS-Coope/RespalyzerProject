@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NoIllnessActivity">
+
     <ImageButton
         android:id="@+id/dsSideMenu3"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:background="#00FFFFFF"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,20 +18,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036"
-        app:srcCompat="@drawable/ic_baseline_dehaze_24" />
+        app:srcCompat="@drawable/ic_baseline_dehaze_24"
+        tools:ignore="SpeakableTextPresentCheck"/>
 
     <ImageButton
         android:id="@+id/dsUserAccount3"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036"
-        app:srcCompat="@drawable/account_circle_fill0_wght400_grad0_opsz48" />
+        app:srcCompat="@drawable/account_circle_fill0_wght400_grad0_opsz48"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/dsRespalyzerLogo3"
@@ -82,8 +85,11 @@
         android:text="@string/arNoIllnessAdvice"
         android:textSize="22sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="268dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52" />
 
     <TextView
         android:id="@+id/textView2"
@@ -94,7 +100,11 @@
         android:textColor="@color/sharp_green"
         android:textSize="22sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="197dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.369" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

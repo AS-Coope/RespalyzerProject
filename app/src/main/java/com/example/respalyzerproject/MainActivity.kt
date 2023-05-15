@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mUserViewModel: UserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_map_location)
         val userDao = UserDatabase.getDatabase(application).userDao()
         val repository = UserRepository(userDao)
 

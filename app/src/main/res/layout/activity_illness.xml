@@ -8,9 +8,9 @@
 
     <ImageButton
         android:id="@+id/dsSideMenu3"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:background="#00FFFFFF"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,20 +18,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036"
-        app:srcCompat="@drawable/ic_baseline_dehaze_24" />
+        app:srcCompat="@drawable/ic_baseline_dehaze_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/dsUserAccount3"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.036"
-        app:srcCompat="@drawable/account_circle_fill0_wght400_grad0_opsz48" />
+        app:srcCompat="@drawable/account_circle_fill0_wght400_grad0_opsz48"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/dsRespalyzerLogo3"

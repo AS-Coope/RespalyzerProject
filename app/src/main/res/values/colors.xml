@@ -10,4 +10,5 @@
     <color name="sharp_green">#5EB030</color>
     <color name="less_sharp_green">#7BB55B</color>
     <color name="red">#CC0000</color>
+    <color name="transparent">#0000</color>
 </resources>
