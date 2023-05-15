@@ -27,6 +27,7 @@
     <string name="ToDashboard">Return to Dashboard</string>
 
     <!-- User Profile Screen -->
+    <string name="upPlaceholder">user_name</string>
     <string name="upName">Edit Name…</string>
     <string name="upWeight">Edit Weight…</string>
     <string name="upHeight">Edit Height…</string>
