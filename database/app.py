@@ -65,7 +65,7 @@ def record():
         recording = content['recording']
         reading = content['reading']
         #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
+        
         
         model = pickle.load(open('../model.pkl','rb'))
         
@@ -88,6 +88,7 @@ def record():
             outcome, percentage = process_predictions(predictions)
         os.remove(temp_filename)
         
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
         cnx.commit()
         cursor.close()
         cnx.close()
