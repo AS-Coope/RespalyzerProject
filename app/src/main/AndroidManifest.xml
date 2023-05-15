@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UserProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".IllnessActivity"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
             android:name=".AudioDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".UserProfileSaveChangesActivity"
             android:exported="false" />
         <activity
             android:name=".AudioHistoryActivity"

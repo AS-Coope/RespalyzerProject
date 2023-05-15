@@ -21,9 +21,9 @@
 
     <ImageButton
         android:id="@+id/dsSideMenu4"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@null"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +35,9 @@
 
     <ImageButton
         android:id="@+id/dsUserAccount4"
-        android:layout_width="46dp"
-        android:layout_height="45dp"
-        android:background="null"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background=
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.953"
