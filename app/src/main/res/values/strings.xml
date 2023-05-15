@@ -32,4 +32,11 @@
     <string name="upWeight">Edit Weight…</string>
     <string name="upHeight">Edit Height…</string>
     <string name="SaveChanges">Save Changes</string>
+
+    <!-- Audio Details Screen -->
+    <string name="adName">audio_name</string>
+    <string name="adSize">###.#kB</string>
+    <string name="adLength">00:00:00</string>
+    <string name="adBgHeading">Background Data:</string>
+    <string name="adBgData">Placeholder</string>
 </resources>
