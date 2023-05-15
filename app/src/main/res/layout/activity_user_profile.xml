@@ -8,6 +8,22 @@
     android:gravity="center_horizontal"
     tools:context=".UserProfileActivity">
 
+    <TextView
+        android:id="@+id/ahTitle2"
+        android:layout_width="204dp"
+        android:layout_height="47dp"
+        android:text="@string/upPlaceholder"
+        android:textColor="@color/black"
+        android:textSize="33sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
+
     <ImageButton
         android:id="@+id/dsSideMenu3"
         android:layout_width="46dp"
@@ -50,8 +66,8 @@
     <EditText
         android:id="@+id/upName"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="266dp"
+        android:layout_height="49dp"
         android:hint="@string/upName"
         android:importantForAutofill="yes"
         android:paddingTop="11dp"
@@ -59,14 +75,18 @@
         android:paddingRight="145dp"
         android:paddingBottom="7dp"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="207dp" />
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.339" />
 
     <EditText
         android:id="@+id/upWeight"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="267dp"
+        android:layout_height="48dp"
         android:hint="@string/upWeight"
         android:importantForAutofill="yes"
         android:paddingTop="11dp"
@@ -74,14 +94,18 @@
         android:paddingRight="145dp"
         android:paddingBottom="7dp"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="269dp" />
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.432" />
 
     <EditText
         android:id="@+id/upHeight"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
         android:hint="@string/upHeight"
         android:importantForAutofill="yes"
         android:paddingTop="11dp"
@@ -89,8 +113,13 @@
         android:paddingRight="145dp"
         android:paddingBottom="7dp"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="335dp" />
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525" />
 
     <Button
         android:id="@+id/upSavebtn"
@@ -107,7 +136,6 @@
 
     <Button
         android:id="@+id/upEmergencyBtn"
-        android:id="@+id/button"
         android:layout_width="307dp"
         android:layout_height="71dp"
         android:text="@string/EmergencyContacts"
@@ -120,7 +148,7 @@
         app:layout_constraintVertical_bias="0.792" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/upDashboardBtn"
         android:layout_width="307dp"
         android:layout_height="71dp"
         android:text="@string/ToDashboard"
