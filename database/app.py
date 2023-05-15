@@ -21,6 +21,12 @@ import os
 import psycopg2
 import keras
 
+from os import path
+from pydub import AudioSegment
+
+src = "ZrC - XLR8 [Snippet - 808 note change] (165bpm).mp3"
+dst = "XLR8 - test.wav"
+
 gSampleRate = 7000
 
 
@@ -62,11 +68,17 @@ def record():
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
         cursor = cnx.cursor()
         content = request.json
-        recording = content['recording']
-        reading = content['reading']
-        #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
+
+        # does the audio conversion by file name
+        audio = AudioSegment.from_mp3(src)
+        audio.export(dst, format="wav")
         
+        recording = dst #content['recording']
+        #reading = #content['reading']
+        #date_recorded = content['date_recorded']
+        cursor.execute(f"INSERT INTO public.recordings (recording, recording, date_recorded, user_id) VALUES ('{recording}','{recording}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
+        # what should actually be there but I'm putting recording twice (in place of reading too) for testing
+        #f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM \"user\"))"        
         model = pickle.load(open('../model.pkl','rb'))
         
         
