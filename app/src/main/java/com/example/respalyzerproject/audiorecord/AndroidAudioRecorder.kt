@@ -35,7 +35,7 @@ class AndroidAudioRecorder(
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4) // apparently MPEG_4 = MP3
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             setOutputFile(FileOutputStream(outputFile).fd)
-            //setOutputFile("$stringDirPath.mp3") // where the file path is stored
+            //setOutputFile("$outputFile.mp3") // where the file path is stored
 
             prepare() // preparing to record
             start() // starts the recording
