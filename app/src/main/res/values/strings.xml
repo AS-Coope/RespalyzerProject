@@ -48,5 +48,11 @@
     <string name="arIllnessAdvice">Please make your way to your nearest medical centre</string>
     <string name="arLearnMore">Learn More About Your Illness</string>
 
+    <!-- Disease Info Screen -->
+    <string name="diName">disease_name</string>
+    <string name="diDesc">disease_description</string>
+    <string name="diSymptoms">disease_symptoms</string>
+    <string name="diTreatment">disease_treatments</string>
+
 
 </resources>
