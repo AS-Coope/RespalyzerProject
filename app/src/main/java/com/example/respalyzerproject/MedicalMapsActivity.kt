@@ -5,28 +5,28 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
+import com.example.respalyzerproject.databinding.ActivityMedicalMapsBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.example.respalyzerproject.databinding.ActivityMedicalMapsBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-//import com.example.map_custom_marker.databinding.ActivityMapsBinding
+import com.google.android.gms.maps.model.*
+import com.google.maps.DirectionsApi
+import com.google.maps.GeoApiContext
+import com.google.maps.model.DirectionsResult
+import com.google.maps.model.TravelMode
 
-class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback{
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMedicalMapsBinding
@@ -34,6 +34,8 @@ class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode =101
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +46,6 @@ class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
 
         getCurrentLocationUser()
     }
@@ -80,8 +81,6 @@ class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             MedicalCenter("National Chest Hospital", LatLng(18.022923325704806, -76.76128685475868)),
             MedicalCenter("Black River Hospital", LatLng(18.0267645393253, -77.85894774722213))
         )
-
-
 
 
     private fun getCurrentLocationUser() {
@@ -132,16 +131,6 @@ class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
@@ -153,21 +142,56 @@ class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .title(MedicalCenter.hosp_name)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
             )
+
+
+            // Position the map's camera near Alice Springs in the center of Australia,
+            // and set the zoom factor so most of Australia shows on the screen.
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(-23.684, 133.903), 4f))
         }
 
 
-        val latLng =LatLng(currentLocation.latitude, currentLocation.longitude)
+        val latLng:com.google.android.gms.maps.model.LatLng=LatLng(currentLocation.latitude, currentLocation.longitude)
         val markerOptions= MarkerOptions().position(latLng).title("Current Location")
         val userLocation = LatLng(currentLocation.latitude, currentLocation.longitude)
-        // Add markers for medical centers
-//        markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.outline_local_hospital_24))
-        //add marker
         mMap.addMarker(markerOptions)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 10f))
 
         googleMap?.animateCamera(CameraUpdateFactory.newLatLng(latLng))
         googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
         googleMap?.addMarker(markerOptions)
+
+//        val polylineOptions = PolylineOptions()
+//            .add(latLng, QuickestRoute())
+//            .width(5f)
+//            .color(Color.RED)
+
+//        mMap.addPolyline(polylineOptions)
+
+        val context = GeoApiContext.Builder()
+            .apiKey("AIzaSyBs0ZmdBS1iDCIk94CKHezoZa31tFW-dVA")
+            .build()
+
+        val request = DirectionsApi.getDirections(context, "${latLng.latitude},${latLng.longitude}",
+            "${QuickestRoute()?.latitude},${QuickestRoute()?.longitude}")
+            .mode(TravelMode.DRIVING) // Specify the travel mode
+
+        val result: DirectionsResult = request.await()
+
+        val route = result.routes[0].overviewPolyline.decodePath()
+
+        val directionsApiLatLngList: List<com.google.maps.model.LatLng> = route
+        val googleMapsLatLngList: List<LatLng> = directionsApiLatLngList.map {
+            LatLng(it.lat, it.lng)
+        }
+
+        val polylineOptions = PolylineOptions()
+            .addAll(googleMapsLatLngList)
+            .width(5f)
+            .color(Color.RED)
+
+
+        mMap.addPolyline(polylineOptions)
+
     }
 
     private fun BitmapFromVector(context: Context, vectorResId:Int): BitmapDescriptor? {
@@ -187,6 +211,55 @@ class MedicalMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //return BitmapDescriptorFactory
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
+
+    private fun QuickestRoute():com.google.android.gms.maps.model.LatLng {
+        val originLatitude = currentLocation.latitude
+        val originLongitude = currentLocation.longitude
+
+        val locations = listOf(
+            LatLng(18.45169954182161, -78.16801457670194),
+            LatLng(18.226152868732573, -78.12900512948241),
+            LatLng(18.470663180591878, -77.90997304023793),
+            LatLng(18.49671723487968, -77.66115590931446),
+            LatLng(18.042816248228185, -77.5091725587995),
+            LatLng(18.35849890743657, -76.89517403558202),
+            LatLng(18.270641023884465, -76.77040569485729),
+            LatLng(18.176546988991348, -76.4560944048941),
+            LatLng(17.880869824218568, -76.39047145363735),
+            LatLng(18.155419758272206, -77.46483564378326),
+            LatLng(17.80804759570096, -77.2413314048941),
+            LatLng(18.13337671979542, -77.03173479140207),
+            LatLng(17.992729899766314, -76.94812382023805),
+            LatLng(18.437382796994015, -77.20996756256609),
+            LatLng(17.96485702688156, -77.24334082023806),
+            LatLng(17.9767389117795, -76.79479719140207),
+            LatLng(17.97724954335577, -76.79497070611954),
+            LatLng(18.02055912091625, -76.77598757327554),
+            LatLng(18.006200310100592, -76.7381904784387),
+            LatLng(17.99969187130106, -76.77821123743391),
+            LatLng(18.022923325704806, -76.76128685475868),
+            LatLng(18.0267645393253, -77.85894774722213)
+        )
+
+        var closestLocation: LatLng? = null
+        var closestDistance = Float.MAX_VALUE
+
+        for (location in locations) {
+            val markerLocation = Location("marker")
+            markerLocation.latitude = location.latitude
+            markerLocation.longitude = location.longitude
+            val distance = currentLocation.distanceTo(markerLocation)
+            if (distance < closestDistance) {
+                closestLocation = location
+                closestDistance = distance
+            }
+
+        }
+        return closestLocation!!
+    }
 }
+
+
+
 
 
