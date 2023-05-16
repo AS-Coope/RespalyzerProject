@@ -9,6 +9,12 @@
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
+        <ImageView
+            android:layout_width="112dp"
+            android:layout_height="110dp"
+
+            android:src="@drawable/respalyzer_logo_official" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +28,7 @@
             android:id = "@+id/userNameField"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -37,7 +43,7 @@
             android:id = "@+id/userAge"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -52,7 +58,7 @@
             android:id = "@+id/userGender"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -67,7 +73,7 @@
             android:id = "@+id/userWeight"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -82,7 +88,7 @@
             android:id = "@+id/userHeight"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -97,7 +103,7 @@
             android:id = "@+id/userKnownIllnesses"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -112,7 +118,7 @@
             android:id = "@+id/userEmergencyContactName"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"
@@ -127,7 +133,7 @@
             android:id = "@+id/userEmergencyContactNumber"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop = "10dp"
             android:paddingTop = "11dp"
             android:paddingBottom = "7dp"

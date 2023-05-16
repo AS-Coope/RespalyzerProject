@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Respalyzer</string>
 
-
+    <!-- Main Activity Screen -->
     <string name="profile_setup_screen1_heading">Profile Set-Up</string>
     <string name="usernameHint">Type Name...</string>
     <string name="userAgeHint">Type Age...</string>
@@ -11,4 +11,43 @@
     <string name="userKnownIllnessesHint">Type Known Illnesses...</string>
     <string name="userEmergencyContactNameHint">Emergency Contact Name</string>
     <string name="userEmergencyContactNumberHint">Emergency Contact #</string>
+
+    <!-- Welcome Screen -->
+    <string name="wsNextBtn">Continue</string>
+
+    <!-- Dashboard Screen -->
+    <string name="AnalyzeBreathing">Analyze Breathing</string>
+    <string name="AudioHistory">Audio History</string>
+    <string name="EmergencyContacts">Emergency Contacts</string>
+    <string name="MedicalCentres">Medical Centres</string>
+
+    <!--Emergency Contacts Screen-->
+    <string name="ecTitle">Emergency Contacts</string>
+    <string name="ViewMedCentres">View Nearest Medical Centres</string>
+    <string name="ToDashboard">Return to Dashboard</string>
+
+    <!-- User Profile Screen -->
+    <string name="upPlaceholder">user_name</string>
+    <string name="upName">Edit Name…</string>
+    <string name="upWeight">Edit Weight…</string>
+    <string name="upHeight">Edit Height…</string>
+    <string name="SaveChanges">Save Changes</string>
+
+    <!-- Audio Details Screen -->
+    <string name="adName">audio_name</string>
+    <string name="adSize">###.#kB</string>
+    <string name="adLength">00:00:00</string>
+    <string name="adBgHeading">Background Data:</string>
+    <string name="adBgData">Placeholder</string>
+
+    <!-- Audio Results Screen -->
+    <string name="arMedicalCentre">View Medical Centres Nearby</string>
+    <string name="arNoIllness">No Respiratory Illnesses were detected!</string>
+    <string name="arNoIllnessAdvice">If you feel unwell, please contact your nearest medical centre</string>
+    <string name="arIllness">Unfortunately, disease was detected</string>
+    <string name="arIllnessAdvice">Please make your way to your nearest medical centre</string>
+    <string name="arLearnMore">Learn More About Your Illness</string>
+    <string name="title_activity_medical_maps">MedicalMapsActivity</string>
+
+
 </resources>
