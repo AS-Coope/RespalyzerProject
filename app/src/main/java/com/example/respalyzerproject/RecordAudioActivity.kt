@@ -13,7 +13,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.respalyzerproject.audioplayback.AndroidAudioPlayer
 import com.example.respalyzerproject.audiorecord.AndroidAudioRecorder
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.AbstractMap.SimpleEntry
 import java.util.Date
@@ -95,7 +100,54 @@ class RecordAudioActivity : AppCompatActivity() {
         raStopRecButton.setOnClickListener{
             recorder.stop()
             Toast.makeText(applicationContext, "Recording of $filePath Has Stopped", Toast.LENGTH_SHORT).show()
+
+            val client = OkHttpClient()
+            // Create a JSON object to hold the data
+            val json = JSONObject()
+            json.put("recording", filePath)
+            val requestBody = json.toString()
+                .toRequestBody("application/json; charset=utf-8".toMediaType())
+
+            // Define the request object
+            val request = Request.Builder()
+                .url("http://192.168.100.73:8080/record")
+                .post(requestBody)
+                .build()
+
+            // Make the request asynchronously
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    // Handle the failure case
+                    e.printStackTrace()
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    // Handle the response
+                    val responseBody = response.body?.string()
+                    if (response.isSuccessful) {
+                        // The request was successful
+                        runOnUiThread {
+                            Toast.makeText(
+                                applicationContext,
+                                "Recording added",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        // The request failed
+                        runOnUiThread {
+                            Toast.makeText(
+                                applicationContext,
+                                responseBody,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            })
         }
+
+
 
         // Audio Playing is not done on this activity anymore
         /*

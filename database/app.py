@@ -77,14 +77,7 @@ def record():
         cursor = cnx.cursor()
         content = request.json
         recording = content['recording']
-        reading = content['reading']
         #date_recorded = content['date_recorded']
-        
-        
-        recording = content['recording']
-        reading = content['reading']
-        #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{recording}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
        
         #f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM \"user\"))"        
         model = pickle.load(open('../model.pkl','rb'))
