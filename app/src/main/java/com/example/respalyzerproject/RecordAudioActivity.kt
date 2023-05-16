@@ -43,6 +43,7 @@ class RecordAudioActivity : AppCompatActivity() {
     // setting up file path where the audio will be stored
     private var directoryPath = ""
     private var filePath = ""
+    private var fileName = ""
     private var recordingNowCheck = false
     private var stoppedNowCheck = false
 
@@ -72,15 +73,17 @@ class RecordAudioActivity : AppCompatActivity() {
         var theDate = simpleDateFormat.format(Date())
 
         //making the file name
+        directoryPath = getExternalFilesDir(null)?.absolutePath ?: ""
         filePath = "audio_rec_101$theDate"
+        fileName = "$directoryPath/$filePath.mp3"
 
         // Start Recording
         raRecButton.setOnClickListener {
-            File(externalCacheDir, "$filePath").also{
+            File(directoryPath, "$filePath").also{ file ->
 
                 Toast.makeText(
                     applicationContext,
-                    "Recording of $filePath Has Begun",
+                    "Recording of $fileName Has Begun",
                     Toast.LENGTH_SHORT
                 ).show()
                 /*
@@ -92,19 +95,19 @@ class RecordAudioActivity : AppCompatActivity() {
                 ).show()
 
                  */
-                recorder.start(it)
+                recorder.start(file)
              }
         }
 
         // Stop Recording
         raStopRecButton.setOnClickListener{
             recorder.stop()
-            Toast.makeText(applicationContext, "Recording of $filePath Has Stopped", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Recording of $fileName Has Stopped", Toast.LENGTH_SHORT).show()
 
             val client = OkHttpClient()
             // Create a JSON object to hold the data
             val json = JSONObject()
-            json.put("recording", filePath)
+            json.put("recording", fileName)
             val requestBody = json.toString()
                 .toRequestBody("application/json; charset=utf-8".toMediaType())
 
