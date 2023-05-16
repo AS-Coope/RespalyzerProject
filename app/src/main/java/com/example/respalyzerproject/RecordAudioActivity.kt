@@ -2,16 +2,28 @@ package com.example.respalyzerproject
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.respalyzerproject.audioplayback.AndroidAudioPlayer
 import com.example.respalyzerproject.audiorecord.AndroidAudioRecorder
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.AbstractMap.SimpleEntry
+import java.util.Date
 
 class RecordAudioActivity : AppCompatActivity() {
+
+    // setting up the permissions
+    // user has to verify that they want to record audio on each use
+    //private var userPermission = arrayOf(Manifest.permission.RECORD_AUDIO)
+    //private var hasUserPermission = false
 
     private val recorder by lazy {
         AndroidAudioRecorder(applicationContext)
@@ -21,41 +33,76 @@ class RecordAudioActivity : AppCompatActivity() {
         AndroidAudioPlayer(applicationContext)
     }
 
-    private var audioFile: File? = null
+    //private var audioFile: File? = null
 
+    // setting up file path where the audio will be stored
+    private var directoryPath = ""
+    private var filePath = ""
+    private var recordingNowCheck = false
+    private var stoppedNowCheck = false
+
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.RECORD_AUDIO),
-            0
+                this,
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                0
         )
+
         setContentView(R.layout.activity_record_audio)
 
-        val raRecButton = findViewById<Button>(R.id.raRecAudiobtn)
-        val raStopRecButton = findViewById<Button>(R.id.raStopRecAudiobtn)
-        val raPlayButton = findViewById<Button>(R.id.raPlayAudiobtn)
-        val raStopPlayButton = findViewById<Button>(R.id.raStopPlayAudiobtn)
+        val raRecButton = findViewById<ImageButton>(R.id.raRecAudiobtn)
+        val raStopRecButton = findViewById<ImageButton>(R.id.raStopRecAudiobtn)
+        //val raPlayButton = findViewById<Button>(R.id.raPlayAudiobtn)
+        //val raStopPlayButton = findViewById<Button>(R.id.raStopPlayAudiobtn)
         val raDashboardScreenButton = findViewById<Button>(R.id.raScreenDashboardBtn)
 
+        // not needed
+        //directoryPath = "${externalCacheDir?.absolutePath}/"
+
+        // distinguishing file names - using the date down to the second to make it unique
+        var simpleDateFormat = SimpleDateFormat("yyyy.MM.DD_hh.mm.ss")
+        var theDate = simpleDateFormat.format(Date())
+
+        //making the file name
+        filePath = "audio_rec_101$theDate"
+
         // Start Recording
-        raRecButton.setOnClickListener{
-            File(cacheDir, "audio.mp3").also{
+        raRecButton.setOnClickListener {
+            File(externalCacheDir, "$filePath").also{
+
+                Toast.makeText(
+                    applicationContext,
+                    "Recording of $filePath Has Begun",
+                    Toast.LENGTH_SHORT
+                ).show()
+                /*
+                // Shows the file path
+                Toast.makeText(
+                    applicationContext,
+                    "Path: $it",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                 */
                 recorder.start(it)
-                audioFile = it
-                Toast.makeText(applicationContext, "Recording Has Begun", Toast.LENGTH_SHORT).show()
-            }
+             }
         }
 
         // Stop Recording
         raStopRecButton.setOnClickListener{
             recorder.stop()
-            Toast.makeText(applicationContext, "Recording Has Stopped", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Recording of $filePath Has Stopped", Toast.LENGTH_SHORT).show()
         }
+
+        // Audio Playing is not done on this activity anymore
+        /*
 
         // Play Audio
         raPlayButton.setOnClickListener {
-            player.playFile(audioFile?: return@setOnClickListener)
+            //player.playFile(audioFile?: return@setOnClickListener)
             Toast.makeText(applicationContext, "Playing Has Begun", Toast.LENGTH_SHORT).show()
         }
 
@@ -64,6 +111,8 @@ class RecordAudioActivity : AppCompatActivity() {
             player.stop()
             Toast.makeText(applicationContext, "Playing Has Stopped", Toast.LENGTH_SHORT).show()
         }
+
+         */
 
         // Stop Playing Audio
         raDashboardScreenButton.setOnClickListener {
