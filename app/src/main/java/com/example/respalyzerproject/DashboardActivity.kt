@@ -50,7 +50,7 @@ class DashboardActivity : AppCompatActivity() {
 
         audioHistoryBtn.setOnClickListener{
                                     // switch to the name of the Audio History activity when that activity is created
-            Intent(this, EmergencyContactsActivity::class.java).also{
+            Intent(this, AudioHistoryActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }
