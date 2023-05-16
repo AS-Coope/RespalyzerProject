@@ -21,11 +21,19 @@ import os
 import psycopg2
 import keras
 
+# these libraries deal with mp3 to wav conversion
 from os import path
 from pydub import AudioSegment
 
-src = "ZrC - XLR8 [Snippet - 808 note change] (165bpm).mp3"
-dst = "XLR8 - test.wav"
+
+src = "file.mp3"
+dst = "testFile.wav"
+
+# this part deals with the conversion
+# use the following 2 commented lines to deal with audio conversion to mp3 (use this in the function where relevant)
+# src should be the mp3 file coming in, and destination will be whatever you want the file to be named as done above
+#audio = AudioSegment.from_mp3(src)
+#audio.export(dst, format="wav")
 
 gSampleRate = 7000
 
@@ -68,16 +76,16 @@ def record():
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
         cursor = cnx.cursor()
         content = request.json
-
-        # does the audio conversion by file name
-        audio = AudioSegment.from_mp3(src)
-        audio.export(dst, format="wav")
-        
-        recording = dst #content['recording']
-        #reading = #content['reading']
+        recording = content['recording']
+        reading = content['reading']
         #date_recorded = content['date_recorded']
-        cursor.execute(f"INSERT INTO public.recordings (recording, recording, date_recorded, user_id) VALUES ('{recording}','{recording}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
-        # what should actually be there but I'm putting recording twice (in place of reading too) for testing
+        
+        
+        recording = content['recording']
+        reading = content['reading']
+        #date_recorded = content['date_recorded']
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{recording}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
+       
         #f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{reading}', NOW(), (SELECT MAX(user_id) FROM \"user\"))"        
         model = pickle.load(open('../model.pkl','rb'))
         
@@ -100,6 +108,7 @@ def record():
             outcome, percentage = process_predictions(predictions)
         os.remove(temp_filename)
         
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
         cnx.commit()
         cursor.close()
         cnx.close()
