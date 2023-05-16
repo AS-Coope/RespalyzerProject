@@ -73,19 +73,6 @@
         app:layout_constraintTop_toBottomOf="@+id/ecRespalyzerLogo"
         app:layout_constraintVertical_bias="0.171" />
 
-    <ImageButton
-        android:id="@+id/editName"
-        android:layout_width="41dp"
-        android:layout_height="42dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286"
-        app:srcCompat="@drawable/phone_solid_1"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <TextView
         android:id="@+id/tvAgeHeading"
         android:layout_width="wrap_content"

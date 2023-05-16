@@ -46,7 +46,7 @@ class UserProfileActivity : AppCompatActivity() {
         }
 
         userProfileBtn.setOnClickListener {
-            Intent(this, UserProfile::class.java).also{
+            Intent(this, UserProfileActivity::class.java).also{
 
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
@@ -68,8 +68,9 @@ class UserProfileActivity : AppCompatActivity() {
         }
 
         // dialog box operations
-        val dialogShowBtn: ImageButton = findViewById(R.id.editName)
+        //val dialogShowBtn: ImageButton = findViewById(R.id.editName)
 
+        /*
         dialogShowBtn.setOnClickListener {
 
             val dialogBinding = layoutInflater.inflate(R.layout.change_user_name_dialog, null)
@@ -108,5 +109,7 @@ class UserProfileActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         }
+
+         */
     }
 }
