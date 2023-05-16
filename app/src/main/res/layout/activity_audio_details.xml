@@ -64,7 +64,7 @@
         android:id="@+id/adTitle"
         android:layout_width="152dp"
         android:layout_height="30dp"
-        android:text="audio_1.wav"
+        android:text="@string/adName"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:textStyle="bold"

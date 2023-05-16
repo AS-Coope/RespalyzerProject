@@ -13,8 +13,13 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.respalyzerproject.audioplayback.AndroidAudioPlayer
 import com.example.respalyzerproject.audiorecord.AndroidAudioRecorder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.File
@@ -77,10 +82,11 @@ class RecordAudioActivity : AppCompatActivity() {
         directoryPath = getExternalFilesDir(null)?.absolutePath ?: ""
         filePath = "audio_rec_101$theDate"
         fileName = "$directoryPath/$filePath.mp3"
+        val filet = File(directoryPath, "$filePath.mp3")
 
         // Start Recording
         raRecButton.setOnClickListener {
-            File(directoryPath, "$filePath").also{ file ->
+            File(directoryPath, "$filePath.mp3").also{ file ->
 
                 Toast.makeText(
                     applicationContext,
@@ -97,6 +103,7 @@ class RecordAudioActivity : AppCompatActivity() {
 
                  */
                 recorder.start(file)
+                println(file)
              }
         }
 
@@ -105,16 +112,20 @@ class RecordAudioActivity : AppCompatActivity() {
             recorder.stop()
             Toast.makeText(applicationContext, "Recording of $fileName Has Stopped", Toast.LENGTH_SHORT).show()
 
-            val client = OkHttpClient()
+            uploadAudioFile(filet)
+
+
+            /*val client = OkHttpClient()
             // Create a JSON object to hold the data
             val json = JSONObject()
-            json.put("recording", fileName)
+            json.put("recording", filet)
+            println(filet)
             val requestBody = json.toString()
                 .toRequestBody("application/json; charset=utf-8".toMediaType())
 
             // Define the request object
             val request = Request.Builder()
-                .url("http://192.168.100.73:8080/record")
+                .url("http://192.168.100.81:8080/record")
                 .post(requestBody)
                 .build()
 
@@ -148,7 +159,7 @@ class RecordAudioActivity : AppCompatActivity() {
                         }
                     }
                 }
-            })
+            })*/
         }
 
 
@@ -187,4 +198,31 @@ class RecordAudioActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun uploadAudioFile(file: File) {
+        val request = Request.Builder()
+            .url("http://192.168.100.81:8080/record") // Replace with your Flask API endpoint
+            .post(RequestBody.create("audio/wav".toMediaTypeOrNull(), file))
+            .build()
+
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val client = OkHttpClient()
+                val response = client.newCall(request).execute()
+
+                // Handle the response as needed
+                if (response.isSuccessful) {
+                    // Successful response
+                } else {
+                    // Error handling for unsuccessful response
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                // Error handling for network error
+            }
+        }
+    }
+
+    // Usage: Call this function when you want to upload the audio file
+    val audioFile = File("path/to/audio/file.wav") // Replace with the path to your audio file
 }

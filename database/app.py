@@ -70,7 +70,7 @@ def register():
     except Exception as e:
         return make_response({'error': str(e)}, 400)
 
-"""@app.route('/record', methods=["POST"])
+@app.route('/record', methods=["POST"])
 def record():
     try:
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
@@ -170,9 +170,9 @@ def process_predictions(predictions):
     outcome = readings[largest_index]
     print(outcome)
     print("3 ran")
-    return outcome, percentage, largest_index"""
+    return outcome, percentage, largest_index
 
-@app.route('/record', methods=["POST"])
+"""@app.route('/record', methods=["POST"])
 def record():
     try:
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
@@ -270,7 +270,7 @@ def process_predictions(predictions):
     outcome = readings[largest_index]
     print(outcome)
     print("3 ran")
-    return outcome, percentage, largest_index
+    return outcome, percentage, largest_index"""
 
 @app.route('/profile/<user_id>', methods=['GET'])
 def get_profile(user_id):
@@ -328,14 +328,37 @@ def get_recordings(user_id):
     try:
         with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
             cursor = cnx.cursor()
-            query = "SELECT recording, reading, date_recorded FROM public.recordings WHERE user_id = %s"
+            query = "SELECT recording, reading, date_recorded, disease_id FROM public.recordings WHERE user_id = %s"
             cursor.execute(query, (user_id,))
             recordings = []
-            for recording, reading, date_recorded in cursor:
+            for recording, reading, date_recorded, disease_id in cursor:
                 record = {
                     'recording': recording,
                     'reading': reading,
-                    'date_recorded': date_recorded
+                    'date_recorded': date_recorded,
+                    'disease_id': disease_id
+                }
+                recordings.append(record)
+            return jsonify({'recordings': recordings}), 200
+            #else:
+                #return jsonify({'error': 'No recordings found'}), 404
+    except psycopg2.Error as error:
+        return jsonify({'error': f"An error has occurred: {error}"}), 500
+
+@app.route('/recording/<recording_id>', methods=['GET'])
+def get_recording(recording_id):
+    try:
+        with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
+            cursor = cnx.cursor()
+            query = "SELECT recording, reading, date_recorded, disease_id FROM public.recordings WHERE recording_id = %s"
+            cursor.execute(query, (recording_id,))
+            recordings = []
+            for recording, reading, date_recorded, disease_id in cursor:
+                record = {
+                    'recording': recording,
+                    'reading': reading,
+                    'date_recorded': date_recorded,
+                    'disease_id': disease_id
                 }
                 recordings.append(record)
             return jsonify({'recordings': recordings}), 200
