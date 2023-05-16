@@ -70,7 +70,7 @@ def register():
     except Exception as e:
         return make_response({'error': str(e)}, 400)
 
-@app.route('/record', methods=["POST"])
+"""@app.route('/record', methods=["POST"])
 def record():
     try:
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
@@ -100,10 +100,10 @@ def record():
             features = np.array(audio_features(temp_filename))
             features_reshaped = np.reshape(features, (1, 193, 1))
             predictions = model.predict(features_reshaped)
-            outcome, percentage = process_predictions(predictions)
+            outcome, percentage, largest_index = process_predictions(predictions)
         os.remove(temp_filename)
         
-        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{file.filename}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id, disease_id) VALUES ('{file.filename}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"), {largest_index})")
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -170,9 +170,9 @@ def process_predictions(predictions):
     outcome = readings[largest_index]
     print(outcome)
     print("3 ran")
-    return outcome, percentage
+    return outcome, percentage, largest_index"""
 
-"""@app.route('/record', methods=["POST"])
+@app.route('/record', methods=["POST"])
 def record():
     try:
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
@@ -200,10 +200,10 @@ def record():
             features = np.array(audio_features(temp_filename))
             features_reshaped = np.reshape(features, (1, 193, 1))
             predictions = model.predict(features_reshaped)
-            outcome, percentage = process_predictions(predictions)
+            outcome, percentage, largest_index = process_predictions(predictions)
         os.remove(temp_filename)
         
-        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id) VALUES ('{recording}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"))")
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id, disease_id) VALUES ('{recording}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"), {largest_index})")
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -270,7 +270,7 @@ def process_predictions(predictions):
     outcome = readings[largest_index]
     print(outcome)
     print("3 ran")
-    return outcome, percentage"""
+    return outcome, percentage, largest_index
 
 @app.route('/profile/<user_id>', methods=['GET'])
 def get_profile(user_id):
