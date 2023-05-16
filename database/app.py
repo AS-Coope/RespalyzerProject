@@ -194,7 +194,33 @@ def get_profile(user_id):
                 return jsonify({'error': 'No recordings found'}), 404
     except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
-    
+
+@app.route('/profile/<user_id>', methods=['PUT'])
+def update_profile(user_id):
+    try:
+        with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
+            cursor = cnx.cursor()
+
+            data = request.json
+            updated_name = data.get('name')
+            updated_age = data.get('age')
+            updated_gender = data.get('gender')
+            updated_weight = data.get('weight')
+            updated_height = data.get('height')
+
+            update_query = "UPDATE public.user SET name = %s, age = %s, gender = %s, weight = %s, height = %s WHERE user_id = %s"
+            cursor.execute(update_query, (updated_name, updated_age, updated_gender, updated_weight, updated_height, user_id))
+            cnx.commit()
+
+            if cursor.rowcount > 0:
+                return jsonify({'message': 'Profile updated successfully'}), 200
+            else:
+                return jsonify({'error': 'No user found with the provided user_id'}), 404
+    except psycopg2.Error as error:
+        return jsonify({'error': f"An error has occurred: {error}"}), 500
+
+
+
 @app.route('/recordings/<user_id>', methods=['GET'])
 def get_recordings(user_id):
     try:
