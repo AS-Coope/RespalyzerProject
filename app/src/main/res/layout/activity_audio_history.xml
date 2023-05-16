@@ -64,9 +64,9 @@
         app:layout_constraintVertical_bias="0.153" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/ahDashboardBtn"
         android:layout_width="307dp"
-        android:layout_height="71dp"
+        android:layout_height="60dp"
         android:text="@string/ToDashboard"
         android:textSize="20sp"
 
