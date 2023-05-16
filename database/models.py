@@ -54,12 +54,14 @@ class Recording(db.Model):
     recording = db.Column(db.String(200))
     reading = db.Column(db.String(200))
     date_recorded = db.Column(db.DateTime(), default=datetime.utcnow)
+    disease_id = db.Column(db.Integer,)
 
-    def __init__(self, recording, user_id, reading):
+    def __init__(self, recording, user_id, reading, disease_id):
         self.recording = recording
         self.user_id = user_id
         self.reading = reading
         self.date_recorded = datetime.utcnow()
+        self.disease_id = disease_id
         
 
     def __repr__(self):
