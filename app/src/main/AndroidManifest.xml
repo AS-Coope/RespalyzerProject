@@ -11,11 +11,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<<<<<<< HEAD
-=======
     <uses-permission android:name="android.permission.MediaStore.createWriteRequest" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
->>>>>>> ca791c0a32d290e2bdd33a5edeb87f63b9a24697
 
     <application
         android:allowBackup="true"

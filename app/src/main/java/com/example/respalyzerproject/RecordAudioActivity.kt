@@ -15,16 +15,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.example.respalyzerproject.audioplayback.AndroidAudioPlayer
 import com.example.respalyzerproject.audiorecord.AndroidAudioRecorder
-<<<<<<< HEAD
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-=======
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,7 +27,6 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
->>>>>>> ca791c0a32d290e2bdd33a5edeb87f63b9a24697
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
@@ -103,33 +92,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         var theDate = simpleDateFormat.format(Date())
 
         //making the file name
-<<<<<<< HEAD
-        directoryPath = getExternalFilesDir(null)?.absolutePath ?: ""
-        filePath = "audio_rec_101$theDate"
-        fileName = "$directoryPath/$filePath.mp3"
-        val filet = File(directoryPath, "$filePath.mp3")
-
-        // Start Recording
-        raRecButton.setOnClickListener {
-            File(directoryPath, "$filePath.mp3").also{ file ->
-
-                Toast.makeText(
-                    applicationContext,
-                    "Recording of $fileName Has Begun",
-                    Toast.LENGTH_SHORT
-                ).show()
-                /*
-                // Shows the file path
-                Toast.makeText(
-                    applicationContext,
-                    "Path: $it",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                 */
-                recorder.start(file)
-                println(file)
-=======
         filePath = "audio_rec_101_$theDate"
         println(filePath)
         var theFile: File? = null
@@ -150,7 +112,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
 
                 println("Printing the file path to external file directory")
                 println(cacheDir)
->>>>>>> ca791c0a32d290e2bdd33a5edeb87f63b9a24697
              }
             println(theFile)
             timer.start()
@@ -162,58 +123,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         raStopRecButton.setOnClickListener{
             raStopRecButton.isClickable = false
             recorder.stop()
-<<<<<<< HEAD
-            Toast.makeText(applicationContext, "Recording of $fileName Has Stopped", Toast.LENGTH_SHORT).show()
-
-            uploadAudioFile(filet)
-
-
-            /*val client = OkHttpClient()
-            // Create a JSON object to hold the data
-            val json = JSONObject()
-            json.put("recording", filet)
-            println(filet)
-            val requestBody = json.toString()
-                .toRequestBody("application/json; charset=utf-8".toMediaType())
-
-            // Define the request object
-            val request = Request.Builder()
-                .url("http://192.168.100.81:8080/record")
-                .post(requestBody)
-                .build()
-
-            // Make the request asynchronously
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    // Handle the failure case
-                    e.printStackTrace()
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    // Handle the response
-                    val responseBody = response.body?.string()
-                    if (response.isSuccessful) {
-                        // The request was successful
-                        runOnUiThread {
-                            Toast.makeText(
-                                applicationContext,
-                                "Recording added",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    } else {
-                        // The request failed
-                        runOnUiThread {
-                            Toast.makeText(
-                                applicationContext,
-                                responseBody,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                }
-            })*/
-=======
             Toast.makeText(applicationContext, "Recording of $theFile Has Stopped", Toast.LENGTH_SHORT).show()
             timer.stop()
             onTimerTick("00:00.00")
@@ -236,7 +145,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
                 }
             }
 
->>>>>>> ca791c0a32d290e2bdd33a5edeb87f63b9a24697
         }
 
 
@@ -276,34 +184,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         }
     }
 
-<<<<<<< HEAD
-    fun uploadAudioFile(file: File) {
-        val request = Request.Builder()
-            .url("http://192.168.100.81:8080/record") // Replace with your Flask API endpoint
-            .post(RequestBody.create("audio/wav".toMediaTypeOrNull(), file))
-            .build()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val client = OkHttpClient()
-                val response = client.newCall(request).execute()
-
-                // Handle the response as needed
-                if (response.isSuccessful) {
-                    // Successful response
-                } else {
-                    // Error handling for unsuccessful response
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-                // Error handling for network error
-            }
-        }
-    }
-
-    // Usage: Call this function when you want to upload the audio file
-    val audioFile = File("path/to/audio/file.wav") // Replace with the path to your audio file
-=======
     private fun uploadAudioFile(audioFile: File, url: String) {
         val client = OkHttpClient()
         println("Here in the okhttp function works")
@@ -343,5 +223,4 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         tvTimer.text = duration
 
     }
->>>>>>> ca791c0a32d290e2bdd33a5edeb87f63b9a24697
 }
