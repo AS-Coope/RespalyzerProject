@@ -54,23 +54,17 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
 
     // setting up file path where the audio will be store
     private var filePath = ""
-<<<<<<< HEAD
-    private var fileName = ""
-    private var recordingNowCheck = false
-    private var stoppedNowCheck = false
-=======
 
     private lateinit var timer: AudioTimer
->>>>>>> ca791c0a32d290e2bdd33a5edeb87f63b9a24697
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_audio)
         ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.RECORD_AUDIO),
-                0
+            this,
+            arrayOf(Manifest.permission.RECORD_AUDIO),
+            0
         )
 
         timer = AudioTimer(this)
@@ -80,7 +74,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         //val raPlayButton = findViewById<Button>(R.id.raPlayAudiobtn)
         //val raStopPlayButton = findViewById<Button>(R.id.raStopPlayAudiobtn)
         val raDashboardScreenButton = findViewById<Button>(R.id.raScreenDashboardBtn)
-        val profileBtn = findViewById<ImageButton>(R.id.dsUserAccount3)
 
         raRecButton.isClickable = true
         raStopRecButton.isClickable = false
@@ -112,7 +105,7 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
 
                 println("Printing the file path to external file directory")
                 println(cacheDir)
-             }
+            }
             println(theFile)
             timer.start()
             raRecButton.isClickable = false
@@ -147,8 +140,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
 
         }
 
-
-
         // Audio Playing is not done on this activity anymore
         /*
 
@@ -170,14 +161,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         raDashboardScreenButton.setOnClickListener {
             Intent(this, DashboardActivity::class.java).also{
 
-                // starts the new activity (next screen, in this case)
-                startActivity(it)
-            }
-        }
-
-        profileBtn.setOnClickListener{
-            // switch to the name of the Analyze Audio activity when that activity is created
-            Intent(this, UserProfileActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }
