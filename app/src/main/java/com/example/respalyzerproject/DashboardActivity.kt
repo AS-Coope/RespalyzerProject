@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 
 class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +15,7 @@ class DashboardActivity : AppCompatActivity() {
         val medCentreBtn = findViewById<Button>(R.id.dbScreenMedicalBtn)
         val audioHistoryBtn = findViewById<Button>(R.id.dbScreenAudioBtn)
         val analyzeAudioBtn = findViewById<Button>(R.id.dbScreenAnalyzeBtn)
+        val profileBtn = findViewById<ImageButton>(R.id.dsUserAccount3)
 
         val beyondArbBtn = findViewById<Button>(R.id.btnBeyArb) // remember to delete later
 
@@ -42,7 +44,7 @@ class DashboardActivity : AppCompatActivity() {
 
         medCentreBtn.setOnClickListener{
                                     // switch to the name of the Med Centres activity when that activity is created
-            Intent(this, EmergencyContactsActivity::class.java).also{
+            Intent(this, MedicalCentresMapActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }
@@ -59,6 +61,14 @@ class DashboardActivity : AppCompatActivity() {
         analyzeAudioBtn.setOnClickListener{
                                     // switch to the name of the Analyze Audio activity when that activity is created
             Intent(this, RecordAudioActivity::class.java).also{
+                // starts the new activity (next screen, in this case)
+                startActivity(it)
+            }
+        }
+
+        profileBtn.setOnClickListener{
+            // switch to the name of the Analyze Audio activity when that activity is created
+            Intent(this, UserProfileActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }

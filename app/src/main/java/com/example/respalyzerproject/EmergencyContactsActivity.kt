@@ -28,6 +28,7 @@ class EmergencyContactsActivity : AppCompatActivity() {
         val ecEmerContNumtv = findViewById<TextView>(R.id.ecEmerContact1Num)
         val ecViewMedCentres = findViewById<Button>(R.id.ecScreenMedicalBtn)
         val ecDashboardScreen = findViewById<Button>(R.id.ecScreenDashboardBtn)
+        val profileBtn = findViewById<ImageButton>(R.id.ecUserAccount)
 
         val userDao = UserDatabase.getDatabase(application).userDao()
         val repository = UserRepository(userDao)
@@ -57,7 +58,7 @@ class EmergencyContactsActivity : AppCompatActivity() {
             }
         }
         ecViewMedCentres.setOnClickListener{
-            Intent(this, DashboardActivity::class.java).also{
+            Intent(this, MedicalCentresMapActivity::class.java).also{
 
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
@@ -73,6 +74,14 @@ class EmergencyContactsActivity : AppCompatActivity() {
             it.data = Uri.parse("tel:${ecEmerContNumtv.text}")
             startActivity(it)
             // it works!!!!!!!!!!!!!!! finally!!!
+        }
+
+        profileBtn.setOnClickListener{
+            // switch to the name of the Analyze Audio activity when that activity is created
+            Intent(this, UserProfileActivity::class.java).also{
+                // starts the new activity (next screen, in this case)
+                startActivity(it)
+            }
         }
 
         /*

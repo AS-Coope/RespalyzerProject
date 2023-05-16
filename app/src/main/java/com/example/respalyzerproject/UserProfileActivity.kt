@@ -12,8 +12,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.example.respalyzerproject.userprofile.User
-import com.example.respalyzerproject.userprofile.UserViewModel
+import com.example.respalyzerproject.userprofile.*
 
 class UserProfileActivity : AppCompatActivity() {
 
@@ -34,7 +33,10 @@ class UserProfileActivity : AppCompatActivity() {
         val ecDashboardScreen = findViewById<Button>(R.id.ecScreenDashboardBtn)
         val userProfileBtn = findViewById<ImageButton>(R.id.ecUserAccount)
 
-        mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        val userDao = UserDatabase.getDatabase(application).userDao()
+        val repository = UserRepository(userDao)
+
+        mUserViewModel = ViewModelProvider(this, UserViewModelFactory(repository)).get(UserViewModel::class.java)
         mUserViewModel.readUserProfile()
 
         // shows relevant user data on user profile screen

@@ -64,6 +64,7 @@ class RecordAudioActivity : AppCompatActivity() {
         //val raPlayButton = findViewById<Button>(R.id.raPlayAudiobtn)
         //val raStopPlayButton = findViewById<Button>(R.id.raStopPlayAudiobtn)
         val raDashboardScreenButton = findViewById<Button>(R.id.raScreenDashboardBtn)
+        val profileBtn = findViewById<ImageButton>(R.id.dsUserAccount3)
 
         // not needed
         //directoryPath = "${externalCacheDir?.absolutePath}/"
@@ -173,6 +174,14 @@ class RecordAudioActivity : AppCompatActivity() {
         raDashboardScreenButton.setOnClickListener {
             Intent(this, DashboardActivity::class.java).also{
 
+                // starts the new activity (next screen, in this case)
+                startActivity(it)
+            }
+        }
+
+        profileBtn.setOnClickListener{
+            // switch to the name of the Analyze Audio activity when that activity is created
+            Intent(this, UserProfileActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }
