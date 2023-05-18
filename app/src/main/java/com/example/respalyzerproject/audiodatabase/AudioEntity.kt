@@ -15,4 +15,4 @@ data class AudioEntity (
     @ColumnInfo(name = "file_size") val fileSize: String,
     @ColumnInfo(name = "diagnosis_reading") val reading:String,
     @ColumnInfo(name = "date_recorded") val date:String
-    )
+)
