@@ -45,7 +45,7 @@ class AudioDetailsActivity : AppCompatActivity() {
 
 
         val request = Request.Builder()
-            .url("http://192.168.100.81:8080/recording/$recordingId")
+            .url("http://localhost:8080/recording/$recordingId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -57,7 +57,7 @@ class AudioDetailsActivity : AppCompatActivity() {
             if (response.isSuccessful && !jsonData.isNullOrEmpty()) {
                 // Parse JSON response
                 val jsonObject = JSONObject(jsonData)
-                val recordingArray = jsonObject.optJSONArray("recording")
+                val recordingArray = jsonObject.optJSONArray("recordings")
 
                 if (recordingArray != null && recordingArray.length() > 0) {
                     val recording = recordingArray.getJSONObject(0)
