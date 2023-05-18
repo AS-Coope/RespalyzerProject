@@ -55,6 +55,7 @@ class Recording(db.Model):
     reading = db.Column(db.String(200))
     date_recorded = db.Column(db.DateTime(), default=datetime.utcnow)
     disease_id = db.Column(db.Integer,)
+    likelihood = db.Column(db.Float(10,2))
 
     def __init__(self, recording, user_id, reading, disease_id):
         self.recording = recording
