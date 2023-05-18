@@ -201,9 +201,10 @@ def record():
             features_reshaped = np.reshape(features, (1, 193, 1))
             predictions = model.predict(features_reshaped)
             outcome, percentage, largest_index = process_predictions(predictions)
+            likelihood = round((percentage * 100), 2)
         os.remove(temp_filename)
         
-        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id, disease_id) VALUES ('{recording}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"), {largest_index})")
+        cursor.execute(f"INSERT INTO public.recordings (recording, reading, date_recorded, user_id, disease_id, likelihood) VALUES ('{recording}','{outcome}', NOW(), (SELECT MAX(user_id) FROM \"user\"), {largest_index}, {likelihood})")
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -350,15 +351,16 @@ def get_recording(recording_id):
     try:
         with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
             cursor = cnx.cursor()
-            query = "SELECT recording, reading, date_recorded, disease_id FROM public.recordings WHERE recording_id = %s"
+            query = "SELECT recording, reading, date_recorded, disease_id, likelihood FROM public.recordings WHERE recording_id = %s"
             cursor.execute(query, (recording_id,))
             recordings = []
-            for recording, reading, date_recorded, disease_id in cursor:
+            for recording, reading, date_recorded, disease_id, likelihood in cursor:
                 record = {
                     'recording': recording,
                     'reading': reading,
                     'date_recorded': date_recorded,
-                    'disease_id': disease_id
+                    'disease_id': disease_id,
+                    'likelihood': likelihood
                 }
                 recordings.append(record)
             return jsonify({'recordings': recordings}), 200

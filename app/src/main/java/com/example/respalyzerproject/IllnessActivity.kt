@@ -50,15 +50,15 @@ class IllnessActivity : AppCompatActivity() {
             }
         }
         // Fetch disease data from Flask API
-        fetchDiseaseData(0)
+        fetchDiseaseData(32)
     }
 
-    private fun fetchDiseaseData(diseaseId: Int) {
+    private fun fetchDiseaseData(recordingId: Int) {
         val client = OkHttpClient()
         val diseaseTextView = findViewById<TextView>(R.id.arIllness)
 
         val request = Request.Builder()
-            .url("http://192.168.100.81:8080/diseases/$diseaseId")
+            .url("http://192.168.100.73:8080/recording/$recordingId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -70,18 +70,16 @@ class IllnessActivity : AppCompatActivity() {
             if (response.isSuccessful && !jsonData.isNullOrEmpty()) {
                 // Parse JSON response
                 val jsonObject = JSONObject(jsonData)
-                val diseaseArray = jsonObject.optJSONArray("disease")
+                val diseaseArray = jsonObject.optJSONArray("recordings")
 
                 if (diseaseArray != null && diseaseArray.length() > 0) {
                     val disease = diseaseArray.getJSONObject(0)
-                    val name = disease.optString("name")
-                    val description = disease.optString("description")
-                    val causes = disease.optString("causes")
-                    val symptoms = disease.optString("symptoms")
-                    val treatment = disease.optString("treatment")
+                    val name = disease.optString("reading")
+                    val likelihood = disease.optString("likelihood")
+                    val diseaseId = disease.optString("disease_id")
 
                     // Display disease data in the TextView
-                    val diseaseData = "Unfortunately, $name was detected"
+                    val diseaseData = "Unfortunately, you are $likelihood% likely to have $name"
                     diseaseTextView.text = diseaseData
                 }
             } else {

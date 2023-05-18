@@ -36,7 +36,7 @@ class DiseaseInfoActivity : AppCompatActivity() {
             }
         }
         // Fetch disease data from Flask API
-        fetchDiseaseData(0)
+        fetchDiseaseData(4)
     }
 
     private fun fetchDiseaseData(diseaseId: Int) {
@@ -48,7 +48,7 @@ class DiseaseInfoActivity : AppCompatActivity() {
 
 
         val request = Request.Builder()
-            .url("http://192.168.100.81:8080/diseases/$diseaseId")
+            .url("http://192.168.100.73:8080/diseases/$diseaseId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {
