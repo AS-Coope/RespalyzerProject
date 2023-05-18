@@ -70,7 +70,7 @@ def register():
     except Exception as e:
         return make_response({'error': str(e)}, 400)
 
-@app.route('/record', methods=["POST"])
+"""@app.route('/record', methods=["POST"])
 def record():
     try:
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
@@ -170,9 +170,9 @@ def process_predictions(predictions):
     outcome = readings[largest_index]
     print(outcome)
     print("3 ran")
-    return outcome, percentage, largest_index
+    return outcome, percentage, largest_index"""
 
-"""@app.route('/record', methods=["POST"])
+@app.route('/record', methods=["POST"])
 def record():
     try:
         cnx = psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer')
@@ -270,7 +270,7 @@ def process_predictions(predictions):
     outcome = readings[largest_index]
     print(outcome)
     print("3 ran")
-    return outcome, percentage, largest_index"""
+    return outcome, percentage, largest_index
 
 @app.route('/profile/<user_id>', methods=['GET'])
 def get_profile(user_id):

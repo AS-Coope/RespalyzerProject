@@ -24,7 +24,7 @@ class DashboardActivity : AppCompatActivity() {
         val dbEmerContactNumber = intent.getStringExtra("EXTRA_EMERUSERNUMBER")
 
         beyondArbBtn.setOnClickListener {
-            Intent(this, APITest::class.java).also{
+            Intent(this, NoIllnessActivity::class.java).also{
 
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
@@ -60,7 +60,7 @@ class DashboardActivity : AppCompatActivity() {
 
         analyzeAudioBtn.setOnClickListener{
                                     // switch to the name of the Analyze Audio activity when that activity is created
-            Intent(this, RecordAudioActivity::class.java).also{
+            Intent(this, IllnessActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }
