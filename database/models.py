@@ -57,12 +57,13 @@ class Recording(db.Model):
     disease_id = db.Column(db.Integer,)
     likelihood = db.Column(db.Float(10,2))
 
-    def __init__(self, recording, user_id, reading, disease_id):
+    def __init__(self, recording, user_id, reading, disease_id, likelihood):
         self.recording = recording
         self.user_id = user_id
         self.reading = reading
         self.date_recorded = datetime.utcnow()
         self.disease_id = disease_id
+        self.likelihood = likelihood
         
 
     def __repr__(self):
