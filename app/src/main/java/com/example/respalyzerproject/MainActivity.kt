@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
 // Define the request object
                         val request = Request.Builder()
-                            .url("http://localhost:8080/register")
+                            .url("http://ip-here/register")
                             .post(requestBody)
                             .build()
 

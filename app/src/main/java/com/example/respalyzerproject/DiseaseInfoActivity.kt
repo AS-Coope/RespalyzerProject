@@ -48,7 +48,7 @@ class DiseaseInfoActivity : AppCompatActivity() {
 
 
         val request = Request.Builder()
-            .url("http://localhost:8080/diseases/$diseaseId")
+            .url("http://ip-here/diseases/$diseaseId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {

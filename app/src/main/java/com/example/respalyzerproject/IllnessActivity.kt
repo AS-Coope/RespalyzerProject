@@ -58,7 +58,7 @@ class IllnessActivity : AppCompatActivity() {
         val diseaseTextView = findViewById<TextView>(R.id.arIllness)
 
         val request = Request.Builder()
-            .url("http://localhost:8080/recording/$recordingId")
+            .url("http://ip-here/recording/$recordingId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -79,7 +79,7 @@ class IllnessActivity : AppCompatActivity() {
                     val diseaseId = disease.optString("disease_id")
 
                     // Display disease data in the TextView
-                    val diseaseData = "Unfortunately, you are $likelihood% likely to have $name"
+                    val diseaseData = "Unfortunately, you have a $likelihood% similarity to someone who has $name"
                     diseaseTextView.text = diseaseData
                 }
             } else {
