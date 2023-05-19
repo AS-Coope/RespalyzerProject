@@ -22,11 +22,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map_location)
+
+        // database related initializations
         val userDao = UserDatabase.getDatabase(application).userDao()
         val repository = UserRepository(userDao)
 
+        // creating the view model
         mUserViewModel = ViewModelProvider(this, UserViewModelFactory(repository)).get(UserViewModel::class.java)
-        //mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        // mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         mUserViewModel.getUserCount().observe(this) { count ->
             if (count > 0) {

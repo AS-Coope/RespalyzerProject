@@ -13,7 +13,7 @@ class AudioTimer (timeListener: OnTimerTickListener){
     private var updateScheduler = Handler(Looper.getMainLooper())
     private lateinit var updateAchiever: Runnable
 
-    private var timeDuration = 0L
+    var timeDuration = 0L
     private var delay = 100L
 
     init {
@@ -39,10 +39,10 @@ class AudioTimer (timeListener: OnTimerTickListener){
         val milli: Long = timeDuration % 1000
         val sec: Long = (timeDuration / 1000) % 60
         val min: Long = (timeDuration / (1000*60)) * 60 // 60 seconds in a minute and every second
-        // has 1000 milliseconds
+                                                        // has 1000 milliseconds
 
         var properTimeDisplay = "%02d:%02d.%02d".format(min, sec, milli/10) //divide milli by 10 to have 2 digits showing
-        // instead of 3
+                                                                            // instead of 3
         return properTimeDisplay
 
     }

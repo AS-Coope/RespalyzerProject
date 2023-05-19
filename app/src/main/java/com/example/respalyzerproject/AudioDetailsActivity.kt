@@ -15,6 +15,9 @@ import okhttp3.Request
 import org.json.JSONObject
 
 class AudioDetailsActivity : AppCompatActivity() {
+    private val player by lazy {
+        AndroidAudioPlayer(applicationContext)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_details)
@@ -71,6 +74,20 @@ class AudioDetailsActivity : AppCompatActivity() {
                 // Handle error case
                 recordingTextView.text = "Error fetching recording data"
             }
+        val stopAudioButton = findViewById<ImageButton>(R.id.imageButton3)
+        val audioPlayButton = findViewById<ImageButton>(R.id.imageButton2)
+        val audioName = findViewById<TextView>(R.id.adTitle)
+
+        // switch audioName.text to have the name stored in the database
+        audioPlayButton.setOnClickListener {
+            //player.playFile(audioFile?: return@setOnClickListener)
+            Toast.makeText(applicationContext, "Playing Has Begun", Toast.LENGTH_SHORT).show()
+        }
+
+        // Stop Playing Audio
+        stopAudioButton.setOnClickListener {
+            player.stop()
+            Toast.makeText(applicationContext, "Playing Has Stopped", Toast.LENGTH_SHORT).show()
         }
     }
 }

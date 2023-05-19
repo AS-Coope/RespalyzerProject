@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="?selectableItemBackground"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    android:clickable="true">
+    
+    <ImageButton
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:clickable="false"
+        android:background="@drawable/ic_round_background"
+        android:src="@drawable/ic_play"
+        tools:ignore="SpeakableTextPresentCheck"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvFileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="filename"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvFileSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:layout_marginRight="40dp"
+                android:textStyle="bold"
+                android:text="filesize"/>
+
+            <TextView
+                android:id="@+id/tvFileLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_marginRight="50dp"
+                android:text="filelength"/>
+
+            <ImageButton
+                android:id="@+id/btnToAudioDetails"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_dehaze_24"
+                tools:ignore="SpeakableTextPresentCheck"/>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:visibility="gone"
+            android:clickable="false"/>
+
+    </LinearLayout>
+    
+
+</LinearLayout>
