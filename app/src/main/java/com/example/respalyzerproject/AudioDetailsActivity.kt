@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import com.example.respalyzerproject.audioplayback.AndroidAudioPlayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,6 +20,7 @@ class AudioDetailsActivity : AppCompatActivity() {
     private val player by lazy {
         AndroidAudioPlayer(applicationContext)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_details)
@@ -25,16 +28,16 @@ class AudioDetailsActivity : AppCompatActivity() {
         val profileBtn = findViewById<ImageButton>(R.id.dsUserAccount3)
         val toDashboardBtn = findViewById<Button>(R.id.adDashboardBtn)
 
-        profileBtn.setOnClickListener{
+        profileBtn.setOnClickListener {
             // switch to the name of the Analyze Audio activity when that activity is created
-            Intent(this, UserProfileActivity::class.java).also{
+            Intent(this, UserProfileActivity::class.java).also {
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }
         }
 
         toDashboardBtn.setOnClickListener {
-            Intent(this, DashboardActivity::class.java).also{
+            Intent(this, DashboardActivity::class.java).also {
                 startActivity(it) // travel back to the dashboard screen
             }
         }
@@ -74,20 +77,21 @@ class AudioDetailsActivity : AppCompatActivity() {
                 // Handle error case
                 recordingTextView.text = "Error fetching recording data"
             }
-        val stopAudioButton = findViewById<ImageButton>(R.id.imageButton3)
-        val audioPlayButton = findViewById<ImageButton>(R.id.imageButton2)
-        val audioName = findViewById<TextView>(R.id.adTitle)
+            val stopAudioButton = findViewById<ImageButton>(R.id.imageButton3)
+            val audioPlayButton = findViewById<ImageButton>(R.id.imageButton2)
+            val audioName = findViewById<TextView>(R.id.adTitle)
 
-        // switch audioName.text to have the name stored in the database
-        audioPlayButton.setOnClickListener {
-            //player.playFile(audioFile?: return@setOnClickListener)
-            Toast.makeText(applicationContext, "Playing Has Begun", Toast.LENGTH_SHORT).show()
-        }
+            // switch audioName.text to have the name stored in the database
+            audioPlayButton.setOnClickListener {
+                //player.playFile(audioFile?: return@setOnClickListener)
+                Toast.makeText(applicationContext, "Playing Has Begun", Toast.LENGTH_SHORT).show()
+            }
 
-        // Stop Playing Audio
-        stopAudioButton.setOnClickListener {
-            player.stop()
-            Toast.makeText(applicationContext, "Playing Has Stopped", Toast.LENGTH_SHORT).show()
+            // Stop Playing Audio
+            stopAudioButton.setOnClickListener {
+                player.stop()
+                Toast.makeText(applicationContext, "Playing Has Stopped", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
