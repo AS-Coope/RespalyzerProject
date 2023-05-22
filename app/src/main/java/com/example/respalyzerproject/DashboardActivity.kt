@@ -60,7 +60,7 @@ class DashboardActivity : AppCompatActivity() {
 
         analyzeAudioBtn.setOnClickListener{
                                     // switch to the name of the Analyze Audio activity when that activity is created
-            Intent(this, IllnessActivity::class.java).also{
+            Intent(this, RecordAudioActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }

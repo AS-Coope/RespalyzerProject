@@ -192,7 +192,7 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
                 try {
                     // Perform your network operation here
                     //println("Before uploadAudioFile")
-                    uploadAudioFile(nonNullableFile, "http://ip-here/")
+                    uploadAudioFile(nonNullableFile, "http://192.168.100.81:8080/record")
                 } catch (e: Exception) {
                     // Handle any exceptions that occur during the network operation
                     e.printStackTrace()
