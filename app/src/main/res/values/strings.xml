@@ -47,6 +47,6 @@
     <string name="arIllness">Unfortunately, disease was detected</string>
     <string name="arIllnessAdvice">Please make your way to your nearest medical centre</string>
     <string name="arLearnMore">Learn More About Your Illness</string>
-
+    <string name="title_activity_medical_maps">MedicalMapsActivity</string>
 
 </resources>
