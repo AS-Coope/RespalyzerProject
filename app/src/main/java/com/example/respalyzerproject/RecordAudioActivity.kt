@@ -23,13 +23,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 // okhttp3 imports
+import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
@@ -192,7 +195,7 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
                 try {
                     // Perform your network operation here
                     //println("Before uploadAudioFile")
-                    uploadAudioFile(nonNullableFile, "http://192.168.100.81:8080/record")
+                    uploadAudioFile(nonNullableFile, "http://192.168.100.73:8080/record")
                 } catch (e: Exception) {
                     // Handle any exceptions that occur during the network operation
                     e.printStackTrace()
@@ -229,26 +232,54 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
     }
 
     // function to handle sending audio data to remote server and api
+//    private fun uploadAudioFile(audioFile: File, url: String) {
+//        val client = OkHttpClient()
+//        println("Here in the okhttp function works")
+//
+//        println(audioFile)
+//        println(url)
+//
+//        // converting the audio file to bytes
+//        val audioBytes = audioFile.readBytes()
+//        println(audioBytes)
+//        val audioBase64 = Base64.getEncoder().encodeToString(audioBytes) // converting to base 64 string
+//        println(audioBase64)
+//        // we have a JSON Object being built specifically to store the audio
+//        val jsonBody = JSONObject()
+//        jsonBody.put("audio", audioBase64)
+//
+//        // storing the request body as a json body
+//        val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
+//
+//        // building the request
+//        val request = Request.Builder()
+//            .url(url)
+//            .post(requestBody)
+//            .header("Content-Type", "application/json")
+//            .build()
+//        println(requestBody)
+//
+//        try {
+//            val response: Response = client.newCall(request).execute()
+//            // Handle the response from the Flask API
+//            val responseBody = response.body?.string() //will contain the response body
+//            println(responseBody)
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        }
+//    }
     private fun uploadAudioFile(audioFile: File, url: String) {
-        val client = OkHttpClient()
-        println("Here in the okhttp function works")
+        val client = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
 
-        println(audioFile)
-        println(url)
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("recording", audioFile.name, audioFile.asRequestBody("audio/mp3".toMediaType()))
+            .build()
 
-        // converting the audio file to bytes
-        val audioBytes = audioFile.readBytes()
-        println(audioBytes)
-        val audioBase64 = Base64.getEncoder().encodeToString(audioBytes) // converting to base 64 string
-        println(audioBase64)
-        // we have a JSON Object being built specifically to store the audio
-        val jsonBody = JSONObject()
-        jsonBody.put("audio", audioBase64)
-
-        // storing the request body as a json body
-        val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaType())
-
-        // building the request
         val request = Request.Builder()
             .url(url)
             .post(requestBody)
@@ -256,8 +287,8 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
 
         try {
             val response: Response = client.newCall(request).execute()
-            // Handle the response from the Flask API
-            response.body?.string() //will contain the response body
+            val responseBody = response.body?.string()
+            println(responseBody)
         } catch (e: IOException) {
             e.printStackTrace()
         }
