@@ -45,7 +45,7 @@ class IllnessActivity : AppCompatActivity() {
         }
 
         medCentreBtn.setOnClickListener {
-            Intent(this, MedicalCentresMapActivity::class.java).also{
+            Intent(this, MedicalMapsActivity::class.java).also{
                 startActivity(it) // travel back to the dashboard screen
             }
         }

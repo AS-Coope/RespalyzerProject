@@ -58,7 +58,7 @@ class EmergencyContactsActivity : AppCompatActivity() {
             }
         }
         ecViewMedCentres.setOnClickListener{
-            Intent(this, MedicalCentresMapActivity::class.java).also{
+            Intent(this, MedicalMapsActivity::class.java).also{
 
                 // starts the new activity (next screen, in this case)
                 startActivity(it)

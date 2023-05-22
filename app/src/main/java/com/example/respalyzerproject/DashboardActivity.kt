@@ -44,7 +44,7 @@ class DashboardActivity : AppCompatActivity() {
 
         medCentreBtn.setOnClickListener{
                                     // switch to the name of the Med Centres activity when that activity is created
-            Intent(this, MedicalCentresMapActivity::class.java).also{
+            Intent(this, MedicalMapsActivity::class.java).also{
                 // starts the new activity (next screen, in this case)
                 startActivity(it)
             }

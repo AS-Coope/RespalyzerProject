@@ -47,6 +47,7 @@
     <string name="arIllness">Unfortunately, disease was detected</string>
     <string name="arIllnessAdvice">Please make your way to your nearest medical centre</string>
     <string name="arLearnMore">Learn More About Your Illness</string>
+<<<<<<< HEAD
 
     <!-- Disease Info Screen -->
     <string name="diName">disease_name</string>
@@ -54,5 +55,8 @@
     <string name="diSymptoms">disease_symptoms</string>
     <string name="diTreatment">disease_treatments</string>
 
+=======
+    <string name="title_activity_medical_maps">MedicalMapsActivity</string>
+>>>>>>> 7170f054e6c75cd5f448c7f253b463be072bfdb7
 
 </resources>
