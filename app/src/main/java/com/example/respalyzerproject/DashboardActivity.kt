@@ -17,19 +17,9 @@ class DashboardActivity : AppCompatActivity() {
         val analyzeAudioBtn = findViewById<Button>(R.id.dbScreenAnalyzeBtn)
         val profileBtn = findViewById<ImageButton>(R.id.dsUserAccount3)
 
-        val beyondArbBtn = findViewById<Button>(R.id.btnBeyArb) // remember to delete later
-
         // putExtra variable assignments
         val dbEmerContactName = intent.getStringExtra("EXTRA_EMERUSERNAME")
         val dbEmerContactNumber = intent.getStringExtra("EXTRA_EMERUSERNUMBER")
-
-        beyondArbBtn.setOnClickListener {
-            Intent(this, NoIllnessActivity::class.java).also{
-
-                // starts the new activity (next screen, in this case)
-                startActivity(it)
-            }
-        }
 
         emerContactsBtn.setOnClickListener{
             Intent(this, EmergencyContactsActivity::class.java).also{

@@ -51,7 +51,7 @@ class AudioDetailsActivity : AppCompatActivity() {
 
 
         val request = Request.Builder()
-            .url("http://192.168.100.73:8080/recording/$recordingId")
+            .url("http://your-ip-here/recording/$recordingId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {

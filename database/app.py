@@ -281,6 +281,29 @@ def get_recording(recording_id):
     except psycopg2.Error as error:
         return jsonify({'error': f"An error has occurred: {error}"}), 500
 
+@app.route('/latestrecording', methods=['GET'])
+def get_latestrecording():
+    try:
+        with psycopg2.connect(user='respalyzer', password='pa$$w0rd', host='localhost', database='respalyzer') as cnx:
+            cursor = cnx.cursor()
+            query = "SELECT recording, reading, date_recorded, disease_id, likelihood FROM public.recordings WHERE recording_id = (SELECT MAX(recording_id) FROM public.recordings)"
+            cursor.execute(query)
+            recordings = []
+            for recording, reading, date_recorded, disease_id, likelihood in cursor:
+                record = {
+                    'recording': recording,
+                    'reading': reading,
+                    'date_recorded': date_recorded,
+                    'disease_id': disease_id,
+                    'likelihood': likelihood
+                }
+                recordings.append(record)
+            return jsonify({'recordings': recordings}), 200
+            #else:
+                #return jsonify({'error': 'No recordings found'}), 404
+    except psycopg2.Error as error:
+        return jsonify({'error': f"An error has occurred: {error}"}), 500
+    
 @app.route('/contacts/<user_id>', methods=['GET'])
 def get_contacts(user_id):
     try:

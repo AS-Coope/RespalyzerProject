@@ -21,6 +21,7 @@ class DiseaseInfoActivity : AppCompatActivity() {
 
         val profileBtn = findViewById<ImageButton>(R.id.dsUserAccount3)
         val medCentreBtn = findViewById<Button>(R.id.iMedicalCentreBtn)
+        val diseaseId = intent.getStringExtra("diseaseId")
 
         profileBtn.setOnClickListener{
             // switch to the name of the Analyze Audio activity when that activity is created
@@ -31,15 +32,15 @@ class DiseaseInfoActivity : AppCompatActivity() {
         }
 
         medCentreBtn.setOnClickListener {
-            Intent(this, MedicalCentresMapActivity::class.java).also{
+            Intent(this, MedicalMapsActivity::class.java).also{
                 startActivity(it) // travel back to the dashboard screen
             }
         }
         // Fetch disease data from Flask API
-        fetchDiseaseData(4)
+        fetchDiseaseData(diseaseId)
     }
 
-    private fun fetchDiseaseData(diseaseId: Int) {
+    private fun fetchDiseaseData(diseaseId: String?) {
         val client = OkHttpClient()
         val diseaseTextView = findViewById<TextView>(R.id.diName)
         val diseaseTextView2 = findViewById<TextView>(R.id.diDesc)
@@ -48,7 +49,7 @@ class DiseaseInfoActivity : AppCompatActivity() {
 
 
         val request = Request.Builder()
-            .url("http://192.168.100.73:8080/diseases/$diseaseId")
+            .url("http://your-ip-here/diseases/$diseaseId")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {

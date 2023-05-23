@@ -15,6 +15,7 @@ import okhttp3.Request
 import org.json.JSONObject
 
 class IllnessActivity : AppCompatActivity() {
+    private lateinit var diseaseId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_illness)
@@ -23,6 +24,10 @@ class IllnessActivity : AppCompatActivity() {
         val learnMoreBtn = findViewById<Button>(R.id.iLearnMore)
         val medCentreBtn = findViewById<Button>(R.id.iMedicalCentreBtn)
         val emerContactsBtn = findViewById<Button>(R.id.iEmergencyContact)
+
+
+        // Fetch disease data from Flask API
+        fetchDiseaseData()
 
         profileBtn.setOnClickListener{
             // switch to the name of the Analyze Audio activity when that activity is created
@@ -34,6 +39,7 @@ class IllnessActivity : AppCompatActivity() {
 
         learnMoreBtn.setOnClickListener {
             Intent(this, DiseaseInfoActivity::class.java).also{
+                it.putExtra("diseaseId", diseaseId)
                 startActivity(it) // travel back to the dashboard screen
             }
         }
@@ -49,16 +55,14 @@ class IllnessActivity : AppCompatActivity() {
                 startActivity(it) // travel back to the dashboard screen
             }
         }
-        // Fetch disease data from Flask API
-        fetchDiseaseData(32)
     }
 
-    private fun fetchDiseaseData(recordingId: Int) {
+    private fun fetchDiseaseData() {
         val client = OkHttpClient()
         val diseaseTextView = findViewById<TextView>(R.id.arIllness)
 
         val request = Request.Builder()
-            .url("http://192.168.100.73:8080/recording/$recordingId")
+            .url("http://your-ip-here/latestrecording")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -76,7 +80,7 @@ class IllnessActivity : AppCompatActivity() {
                     val disease = diseaseArray.getJSONObject(0)
                     val name = disease.optString("reading")
                     val likelihood = disease.optString("likelihood")
-                    val diseaseId = disease.optString("disease_id")
+                    diseaseId = disease.optString("disease_id")
 
                     // Display disease data in the TextView
                     val diseaseData = "Unfortunately, you have a $likelihood% similarity to someone who has $name"

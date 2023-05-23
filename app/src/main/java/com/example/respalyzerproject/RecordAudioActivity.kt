@@ -18,9 +18,8 @@ import com.example.respalyzerproject.audiodatabase.AudioDatabase
 import com.example.respalyzerproject.audiodatabase.AudioEntity
 import com.example.respalyzerproject.audioplayback.AndroidAudioPlayer
 import com.example.respalyzerproject.audiorecord.AndroidAudioRecorder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+
 
 // okhttp3 imports
 import okhttp3.*
@@ -195,7 +194,7 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
                 try {
                     // Perform your network operation here
                     //println("Before uploadAudioFile")
-                    uploadAudioFile(nonNullableFile, "http://192.168.100.73:8080/record")
+                    uploadAudioFile(nonNullableFile, "http://your-ip-here/record")
                 } catch (e: Exception) {
                     // Handle any exceptions that occur during the network operation
                     e.printStackTrace()
@@ -232,42 +231,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
     }
 
     // function to handle sending audio data to remote server and api
-//    private fun uploadAudioFile(audioFile: File, url: String) {
-//        val client = OkHttpClient()
-//        println("Here in the okhttp function works")
-//
-//        println(audioFile)
-//        println(url)
-//
-//        // converting the audio file to bytes
-//        val audioBytes = audioFile.readBytes()
-//        println(audioBytes)
-//        val audioBase64 = Base64.getEncoder().encodeToString(audioBytes) // converting to base 64 string
-//        println(audioBase64)
-//        // we have a JSON Object being built specifically to store the audio
-//        val jsonBody = JSONObject()
-//        jsonBody.put("audio", audioBase64)
-//
-//        // storing the request body as a json body
-//        val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
-//
-//        // building the request
-//        val request = Request.Builder()
-//            .url(url)
-//            .post(requestBody)
-//            .header("Content-Type", "application/json")
-//            .build()
-//        println(requestBody)
-//
-//        try {
-//            val response: Response = client.newCall(request).execute()
-//            // Handle the response from the Flask API
-//            val responseBody = response.body?.string() //will contain the response body
-//            println(responseBody)
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//    }
     private fun uploadAudioFile(audioFile: File, url: String) {
         val client = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
@@ -289,8 +252,54 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
             val response: Response = client.newCall(request).execute()
             val responseBody = response.body?.string()
             println(responseBody)
+            fetchRecordingData()
         } catch (e: IOException) {
             e.printStackTrace()
+        }
+    }
+
+    private fun fetchRecordingData() {
+        val client = OkHttpClient()
+
+        val request = Request.Builder()
+            .url("http://192.168.100.73:8080/latestrecording")
+            .build()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = withContext(Dispatchers.IO) {
+                client.newCall(request).execute()
+            }
+            val jsonData = response.body?.string()
+
+            if (response.isSuccessful && !jsonData.isNullOrEmpty()) {
+                // Parse JSON response
+                val jsonObject = JSONObject(jsonData)
+                val diseaseArray = jsonObject.optJSONArray("recordings")
+
+                if (diseaseArray != null && diseaseArray.length() > 0) {
+                    val disease = diseaseArray.getJSONObject(0)
+                    val name = disease.optString("reading")
+                    val likelihood = disease.optString("likelihood")
+                    val diseaseId = disease.optString("disease_id")
+                    if (diseaseId == "1") {
+                        Intent(applicationContext, NoIllnessActivity::class.java).also{
+
+                            // starts the new activity (next screen, in this case)
+                            startActivity(it)
+                        }
+                    }
+                    else{
+                        Intent(applicationContext, IllnessActivity::class.java).also {
+                            startActivity(it)
+                        }
+                    }
+
+                }
+            }
+//            } else {
+//                // Handle error case
+//                diseaseTextView.text = "Error fetching disease data"
+//            }
         }
     }
 
