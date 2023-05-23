@@ -40,14 +40,8 @@ import java.util.Date
 
 class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener {
 
-
-
     private val recorder by lazy {
         AndroidAudioRecorder(applicationContext)
-    }
-
-    private val player by lazy {
-        AndroidAudioPlayer(applicationContext)
     }
 
     //private var audioFile: File? = null
@@ -192,7 +186,7 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
                 try {
                     // Perform your network operation here
                     //println("Before uploadAudioFile")
-                    uploadAudioFile(nonNullableFile, "http://192.168.100.81:8080/")
+                    uploadAudioFile(nonNullableFile, "put url here")
                 } catch (e: Exception) {
                     // Handle any exceptions that occur during the network operation
                     e.printStackTrace()
@@ -217,7 +211,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         }
 
          */
-
         // Stop Playing Audio
         raDashboardScreenButton.setOnClickListener {
             Intent(this, DashboardActivity::class.java).also{

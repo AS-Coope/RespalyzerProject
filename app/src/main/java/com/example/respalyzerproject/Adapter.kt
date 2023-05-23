@@ -8,13 +8,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.respalyzerproject.audiodatabase.AudioEntity
 
-class Adapter(var audioRecords: ArrayList<AudioEntity>): RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(var audioRecords: ArrayList<AudioEntity>, var itemListener: onItemClickListener): RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-    inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView){
+    inner class ViewHolder(theView: View): RecyclerView.ViewHolder(theView), View.OnClickListener{
         var fileName: TextView = theView.findViewById(R.id.tvFileName)
         var fileSize: TextView = theView.findViewById(R.id.tvFileSize)
         var fileLength: TextView = theView.findViewById(R.id.tvFileLength)
-        var check: CheckBox = theView.findViewById(R.id.checkbox)
+        //var check: CheckBox = theView.findViewById(R.id.checkbox)
+
+        // activating the clicking ability
+        init{
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(v: View?) {
+
+            // get the position of the item in the recycler view
+            val itemPosition = adapterPosition
+            // ensuring that the item does appear in the recycler view
+            if(itemPosition != RecyclerView.NO_POSITION)  {
+                itemListener.onItemClickListener(itemPosition)
+                //println("This works")
+            }
+        }
 
     }
 
@@ -24,6 +39,7 @@ class Adapter(var audioRecords: ArrayList<AudioEntity>): RecyclerView.Adapter<Ad
         return ViewHolder(startView)
     }
 
+    // getting number of items in the audioRecords array
     override fun getItemCount(): Int {
         return audioRecords.size
     }
