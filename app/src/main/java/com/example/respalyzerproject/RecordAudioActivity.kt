@@ -42,14 +42,8 @@ import java.util.Date
 
 class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener {
 
-
-
     private val recorder by lazy {
         AndroidAudioRecorder(applicationContext)
-    }
-
-    private val player by lazy {
-        AndroidAudioPlayer(applicationContext)
     }
 
     //private var audioFile: File? = null
@@ -219,7 +213,6 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         }
 
          */
-
         // Stop Playing Audio
         raDashboardScreenButton.setOnClickListener {
             Intent(this, DashboardActivity::class.java).also{
@@ -262,7 +255,7 @@ class RecordAudioActivity : AppCompatActivity(), AudioTimer.OnTimerTickListener 
         val client = OkHttpClient()
 
         val request = Request.Builder()
-            .url("http://192.168.100.73:8080/latestrecording")
+            .url("http://your-ip-here/latestrecording")
             .build()
 
         GlobalScope.launch(Dispatchers.Main) {
